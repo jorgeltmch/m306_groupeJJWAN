@@ -1,0 +1,23 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>520</x><y>380</y><w>210</w><h>120</h></coordinates><panel_attributes>EVENEMENT
+--
+idEvent
+nomEvent
+descriptionEvent
+dateEvent
+#idPosition
+#idCategorie
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>130</x><y>460</y><w>210</w><h>80</h></coordinates><panel_attributes>CATEGORIE
+--
+idCategorie
+nomCategorie
+imageCategorie</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>440</y><w>210</w><h>70</h></coordinates><panel_attributes>POSITION
+--
+idPosition
+latitude
+longitude</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>450</y><w>210</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=0..n
+m2=0..1
+Possède</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>470</y><w>210</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=0..1
+m2=0..n
+Contient</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element></diagram>
