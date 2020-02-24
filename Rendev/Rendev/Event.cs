@@ -1,15 +1,17 @@
 // FILE: C:/m306_groupeJJWAN//Event.cs
 
 // In this section you can add your own using directives
-    // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000867 begin
-    // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000867 end
+// section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000867 begin
+// section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000867 end
 
+using System;
+using System.Collections.Generic;
 /// <summary>
-    ///  A class that represents ...
-    /// 
-    ///  @see OtherClasses
-    ///  @author your_name_here
-     /// </summary>
+///  A class that represents ...
+/// 
+///  @see OtherClasses
+///  @author your_name_here
+/// </summary>
 public class Event
 {
     // Attributes
@@ -32,11 +34,7 @@ public class Event
 
     /// <summary> 
     /// </summary>
-    public ArrayList  myCategory;
-
-    /// <summary> 
-    /// </summary>
-    public ArrayList  myCategory;
+    public List<Category>  myCategory;
 
     // Operations
 
@@ -57,7 +55,7 @@ public class Event
     /// </param>
     /// <returns>
     /// </returns>
-    public Event( name,  category,  description,  date,  adress)
+    public Event( string name, Category category, string description, DateTime date, string adress)
     {
     // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000893 begin
     // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000893 end
@@ -81,7 +79,7 @@ public class Event
     /// </param>
     /// <returns>
     /// </returns>
-    public Event( name,  category,  description,  date,  geoLocation)
+    public Event( string name, Category category, string description, DateTime date, double geoLocationLon, double geoLocationLat)
     {
     // section 10-5-45-40--5b51da51:1700b5340f9:-8000:000000000000089E begin
     // section 10-5-45-40--5b51da51:1700b5340f9:-8000:000000000000089E end

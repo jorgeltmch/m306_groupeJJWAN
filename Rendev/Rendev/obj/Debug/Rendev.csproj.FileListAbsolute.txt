@@ -11,3 +11,12 @@ C:\Users\Dede\Desktop\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.Category.r
 C:\Users\Dede\Desktop\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmAddModif.resources
 C:\Users\Dede\Desktop\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmModifSupr.resources
 C:\Users\Dede\Desktop\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmCategory.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.csprojAssemblyReference.cache
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmAddModif.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmCategory.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmModifSupr.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.frmPrincipal.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.Properties.Resources.resources
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.csproj.GenerateResource.cache
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.exe
+C:\m306_groupeJJWAN\Rendev\Rendev\obj\Debug\Rendev.pdb
