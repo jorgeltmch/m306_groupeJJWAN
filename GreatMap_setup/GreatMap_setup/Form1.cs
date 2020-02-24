@@ -20,11 +20,14 @@ namespace GreatMap_setup
         private void Form1_Load(object sender, EventArgs e)
         {
             map.ShowCenter = false;
-            map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            map.Position = new GMap.NET.PointLatLng(46.195566, 6.110237);
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            map.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+            //map.Position = new GMap.NET.PointLatLng(46.195566, 6.110237);
+        }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GMap.NET.GeoCoderStatusCode geocode = map.SetPositionByKeywords("USA");
         }
     }
 }
