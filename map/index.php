@@ -1,3 +1,14 @@
+<?php
+
+require_once 'lib.inc.php.php';
+
+
+$events = getEvents();
+
+var_dump($events);
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
