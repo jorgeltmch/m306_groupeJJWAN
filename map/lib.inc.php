@@ -2,10 +2,12 @@
 
 require_once './db/EDatabase.php';
 
+
+
 function getEvents(){
     static $req;
 
-    $sql = 'SELECT `nomEvent`, `descriptionEvent`,`dateEvent`, `latitude`,`longitude`, `nomCategorie`.`imageCategorie` FROM evenement 
+    $sql = 'SELECT `nomEvent`, `descriptionEvent`,`dateEvent`, `latitude`,`longitude`, `nomCategorie`, `imageCategorie` FROM evenement 
                 JOIN position ON `evenement`.`idPosition` =  `position`.`idPosition` 
                 JOIN categorie ON `evenement`.`idCategorie` =  `categorie`.`idCategorie`; '; 
     if ($req == null) {
