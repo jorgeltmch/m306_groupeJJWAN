@@ -17,5 +17,13 @@ namespace Rendev
             InitializeComponent();
 
         }
+
+        private void ModifMap_Load(object sender, EventArgs e)
+        {
+            ModifMap.ShowCenter = false;
+            ModifMap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            ModifMap.Position = new GMap.NET.PointLatLng(46.195566, 6.110237);
+        }
     }
 }

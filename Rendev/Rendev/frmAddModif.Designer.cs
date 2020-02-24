@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,16 +39,8 @@
             this.cmbCategoriEvent = new System.Windows.Forms.ComboBox();
             this.tbx = new System.Windows.Forms.TextBox();
             this.btnConfirmEvent = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.ModifMap = new GMap.NET.WindowsForms.GMapControl();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(572, 368);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -142,11 +133,39 @@
             this.btnConfirmEvent.Text = "Confirm Event";
             this.btnConfirmEvent.UseVisualStyleBackColor = true;
             // 
+            // ModifMap
+            // 
+            this.ModifMap.Bearing = 0F;
+            this.ModifMap.CanDragMap = true;
+            this.ModifMap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.ModifMap.GrayScaleMode = false;
+            this.ModifMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.ModifMap.LevelsKeepInMemmory = 5;
+            this.ModifMap.Location = new System.Drawing.Point(12, 12);
+            this.ModifMap.MarkersEnabled = true;
+            this.ModifMap.MaxZoom = 18;
+            this.ModifMap.MinZoom = 2;
+            this.ModifMap.MouseWheelZoomEnabled = true;
+            this.ModifMap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.ModifMap.Name = "ModifMap";
+            this.ModifMap.NegativeMode = false;
+            this.ModifMap.PolygonsEnabled = true;
+            this.ModifMap.RetryLoadTile = 0;
+            this.ModifMap.RoutesEnabled = true;
+            this.ModifMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.ModifMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.ModifMap.ShowTileGridLines = false;
+            this.ModifMap.Size = new System.Drawing.Size(584, 368);
+            this.ModifMap.TabIndex = 12;
+            this.ModifMap.Zoom = 0D;
+            this.ModifMap.Load += new System.EventHandler(this.ModifMap_Load);
+            // 
             // frmAddModif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 395);
+            this.Controls.Add(this.ModifMap);
             this.Controls.Add(this.btnConfirmEvent);
             this.Controls.Add(this.tbx);
             this.Controls.Add(this.cmbCategoriEvent);
@@ -158,19 +177,15 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "frmAddModif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAddModif";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -182,5 +197,6 @@
         private System.Windows.Forms.ComboBox cmbCategoriEvent;
         private System.Windows.Forms.TextBox tbx;
         private System.Windows.Forms.Button btnConfirmEvent;
+        private GMap.NET.WindowsForms.GMapControl ModifMap;
     }
 }
