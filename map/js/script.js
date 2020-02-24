@@ -1,4 +1,4 @@
- /**
+      /**
  * Elements that make up the popup.
  */
 var container = document.getElementById('popup');
@@ -45,6 +45,8 @@ closer.onclick = function() {
     })
   });
 
+
+
 /**
  * Add a click handler to the map to render the popup.
  */
@@ -52,8 +54,7 @@ closer.onclick = function() {
   var coordinate = evt.coordinate;
   var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
 
-  content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
-      '</code>';
+  content.innerHTML = "<div class='card'> <img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div></div>"  ;
   overlay.setPosition(coordinate);
 });
   
