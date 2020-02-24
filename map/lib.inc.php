@@ -10,7 +10,7 @@ function getEvents(){
                 JOIN categorie ON `evenement`.`idCategorie` =  `categorie`.`idCategorie`; '; 
     if ($req == null) {
         try {
-            $req = DB()->prepare($sql);
+            $req = EDatabase::prepare($sql);
             $req->execute();
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";

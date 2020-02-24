@@ -1,6 +1,6 @@
 <?php
 
-require_once 'lib.inc.php.php';
+require_once 'lib.inc.php';
 
 
 $events = getEvents();
