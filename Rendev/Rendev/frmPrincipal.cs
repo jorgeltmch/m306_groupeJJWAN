@@ -16,5 +16,12 @@ namespace Rendev
         {
             InitializeComponent();
         }
+
+        private void btnAddEvent_Click(object sender, EventArgs e)
+        {
+            ConnectionBD myConnec = ConnectionBD.getInstance();
+            //label1.Text = myConnec.getValues();
+            myConnec.changeValues();
+        }
     }
 }
