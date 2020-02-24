@@ -54,7 +54,7 @@ closer.onclick = function() {
   var coordinate = evt.coordinate;
   var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
 
-  content.innerHTML = "<div class='card'> <img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div></div>"  ;
+  content.innerHTML = "<img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div>"  ;
   overlay.setPosition(coordinate);
 });
   
