@@ -28,19 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddEvent = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+=======
+            this.AddMap = new GMap.NET.WindowsForms.GMapControl();
+>>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(722, 380);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // btnAddEvent
             // 
@@ -52,6 +47,7 @@
             this.btnAddEvent.UseVisualStyleBackColor = true;
             this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
+<<<<<<< HEAD
             // label1
             // 
             this.label1.AutoSize = true;
@@ -60,30 +56,62 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
+=======
+            // AddMap
+            // 
+            this.AddMap.Bearing = 0F;
+            this.AddMap.CanDragMap = true;
+            this.AddMap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.AddMap.GrayScaleMode = false;
+            this.AddMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.AddMap.LevelsKeepInMemmory = 5;
+            this.AddMap.Location = new System.Drawing.Point(12, 12);
+            this.AddMap.MarkersEnabled = true;
+            this.AddMap.MaxZoom = 18;
+            this.AddMap.MinZoom = 2;
+            this.AddMap.MouseWheelZoomEnabled = true;
+            this.AddMap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.AddMap.Name = "AddMap";
+            this.AddMap.NegativeMode = false;
+            this.AddMap.PolygonsEnabled = true;
+            this.AddMap.RetryLoadTile = 0;
+            this.AddMap.RoutesEnabled = true;
+            this.AddMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.AddMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.AddMap.ShowTileGridLines = false;
+            this.AddMap.Size = new System.Drawing.Size(722, 380);
+            this.AddMap.TabIndex = 2;
+            this.AddMap.Zoom = 0D;
+            this.AddMap.Load += new System.EventHandler(this.AddMap_Load);
+>>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 441);
+<<<<<<< HEAD
             this.Controls.Add(this.label1);
+=======
+            this.Controls.Add(this.AddMap);
+>>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
             this.Controls.Add(this.btnAddEvent);
-            this.Controls.Add(this.pictureBox1);
             this.MaximizeBox = false;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rendev";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnAddEvent;
+<<<<<<< HEAD
         private System.Windows.Forms.Label label1;
+=======
+        private GMap.NET.WindowsForms.GMapControl AddMap;
+>>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
     }
 }
 
