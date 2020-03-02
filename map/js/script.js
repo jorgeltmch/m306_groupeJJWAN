@@ -1,6 +1,10 @@
       /**
  * Elements that make up the popup.
  */
+
+
+
+
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
@@ -40,7 +44,7 @@ closer.onclick = function() {
     
     //Vue spawn
     view: new ol.View({
-      center: ol.proj.fromLonLat([6.1667, 46.2]),
+      center: ol.proj.fromLonLat([6.1667, 46.2]), // AJOUTER LAT LONG DEPUIS LA BASE
       zoom: 12
     })
   });
@@ -59,6 +63,7 @@ closer.onclick = function() {
 });
   
   // Positions
+  // AJOUTER LAT LONG DEPUIS LA BASE
   var centerLongitudeLatitude = ol.proj.fromLonLat([6.055692, 46.233058]);
   var centerLongitudeLatitude2 = ol.proj.fromLonLat([6.255692, 46.233058]);
   
