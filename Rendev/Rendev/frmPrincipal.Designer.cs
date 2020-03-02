@@ -1,4 +1,6 @@
-﻿namespace Rendev
+﻿using System;
+
+namespace Rendev
 {
     partial class frmPrincipal
     {
@@ -28,13 +30,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddEvent = new System.Windows.Forms.Button();
-<<<<<<< HEAD
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-=======
             this.AddMap = new GMap.NET.WindowsForms.GMapControl();
->>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
+            this.btnAddEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddEvent
@@ -47,7 +45,6 @@
             this.btnAddEvent.UseVisualStyleBackColor = true;
             this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
-<<<<<<< HEAD
             // label1
             // 
             this.label1.AutoSize = true;
@@ -56,7 +53,6 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
-=======
             // AddMap
             // 
             this.AddMap.Bearing = 0F;
@@ -83,18 +79,14 @@
             this.AddMap.TabIndex = 2;
             this.AddMap.Zoom = 0D;
             this.AddMap.Load += new System.EventHandler(this.AddMap_Load);
->>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 441);
-<<<<<<< HEAD
             this.Controls.Add(this.label1);
-=======
             this.Controls.Add(this.AddMap);
->>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
             this.Controls.Add(this.btnAddEvent);
             this.MaximizeBox = false;
             this.Name = "frmPrincipal";
@@ -107,11 +99,8 @@
 
         #endregion
         private System.Windows.Forms.Button btnAddEvent;
-<<<<<<< HEAD
         private System.Windows.Forms.Label label1;
-=======
         private GMap.NET.WindowsForms.GMapControl AddMap;
->>>>>>> c91261340e0823ef1af11c5a89e85df352d93fab
     }
 }
 

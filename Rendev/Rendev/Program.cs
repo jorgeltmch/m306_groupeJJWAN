@@ -16,7 +16,7 @@ namespace Rendev
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmModifSupr());
+            Application.Run(new frmPrincipal());
         }
     }
 }
