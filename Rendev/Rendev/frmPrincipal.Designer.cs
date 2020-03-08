@@ -35,16 +35,6 @@ namespace Rendev
             this.btnAddEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnAddEvent
-            // 
-            this.btnAddEvent.Location = new System.Drawing.Point(602, 398);
-            this.btnAddEvent.Name = "btnAddEvent";
-            this.btnAddEvent.Size = new System.Drawing.Size(132, 31);
-            this.btnAddEvent.TabIndex = 1;
-            this.btnAddEvent.Text = "Ajout Event";
-            this.btnAddEvent.UseVisualStyleBackColor = true;
-            this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -53,6 +43,7 @@ namespace Rendev
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
+            // 
             // AddMap
             // 
             this.AddMap.Bearing = 0F;
@@ -78,7 +69,16 @@ namespace Rendev
             this.AddMap.Size = new System.Drawing.Size(722, 380);
             this.AddMap.TabIndex = 2;
             this.AddMap.Zoom = 0D;
-            this.AddMap.Load += new System.EventHandler(this.AddMap_Load);
+            // 
+            // btnAddEvent
+            // 
+            this.btnAddEvent.Location = new System.Drawing.Point(602, 398);
+            this.btnAddEvent.Name = "btnAddEvent";
+            this.btnAddEvent.Size = new System.Drawing.Size(132, 31);
+            this.btnAddEvent.TabIndex = 1;
+            this.btnAddEvent.Text = "Ajout Event";
+            this.btnAddEvent.UseVisualStyleBackColor = true;
+            this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
             // frmPrincipal
             // 
