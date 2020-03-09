@@ -19,10 +19,7 @@ var_dump($events);
   </head>
   <body>
     <div id="map" class="map"></div>
-	<div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <div id="popup-content"></div>
-    </div>
+    <div id="status"></div>
     <script src="js/script.js"></script>
   </body>
 </html>
