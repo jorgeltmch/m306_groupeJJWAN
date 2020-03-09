@@ -18,5 +18,10 @@ namespace Rendev
             InitializeComponent();
             _map = new Map(ModifMap);
         }
+
+        private void btnConfirmEvent_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
