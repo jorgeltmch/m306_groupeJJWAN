@@ -26,11 +26,7 @@ var overlay = new ol.Overlay({
  * Add a click handler to hide the popup.
  * @return {boolean} Don't follow the href.
  */
-closer.onclick = function() {
-  overlay.setPosition(undefined);
-  closer.blur();
-  return false;
-};
+
 
 
     var map = new ol.Map({
@@ -51,16 +47,6 @@ closer.onclick = function() {
 
 
 
-/**
- * Add a click handler to the map to render the popup.
- */
- map.on('singleclick', function(evt) {
-  var coordinate = evt.coordinate;
-  var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-
-  content.innerHTML = "<img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div>"  ;
-  overlay.setPosition(coordinate);
-});
   
   // Positions
   // AJOUTER LAT LONG DEPUIS LA BASE
@@ -90,6 +76,40 @@ closer.onclick = function() {
   // ajout layer
   map.addLayer(layer);
 }
+
+var highlightStyle = new ol.style.Style({
+  fill: new ol.style.Fill({
+    color: 'rgba(255,255,255,0.7)'
+  }),
+  stroke: new ol.style.Stroke({
+    color: '#3399CC',
+    width: 3
+  })
+});
+
+var selected = null;
+var status = document.getElementById('status');
+
+map.on('pointermove', function(e) {
+  if (selected !== null) {
+    selected.setStyle(undefined);
+    selected = null;
+  }
+
+  map.forEachFeatureAtPixel(e.pixel, function(f) {
+    selected = f;
+    f.setStyle(highlightStyle);
+    return true;
+  });
+
+  if (selected) {
+    var coordinate = e.coordinate;
+    var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
+    status.innerHTML = "<img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div>"  ;
+  } else {
+    status.innerHTML = '&nbsp;';
+  }
+});
 
 	// Ajout des positions via la fonction 
   AddLayer(centerLongitudeLatitude);
