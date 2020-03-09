@@ -132,6 +132,7 @@
             this.btnConfirmEvent.TabIndex = 11;
             this.btnConfirmEvent.Text = "Confirm Event";
             this.btnConfirmEvent.UseVisualStyleBackColor = true;
+            this.btnConfirmEvent.Click += new System.EventHandler(this.btnConfirmEvent_Click);
             // 
             // ModifMap
             // 
