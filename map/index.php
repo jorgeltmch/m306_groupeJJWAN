@@ -2,7 +2,7 @@
 
 require_once 'lib.inc.php';
 
-
+//phpinfo();
 $events = getEvents();
 
 var_dump($events);

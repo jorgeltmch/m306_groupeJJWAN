@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="ConnectionBD.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="frmAddModif.cs">
       <SubType>Form</SubType>
@@ -101,6 +102,7 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddModif.resx">
