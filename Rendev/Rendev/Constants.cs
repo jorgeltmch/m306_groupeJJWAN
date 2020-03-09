@@ -16,5 +16,7 @@ namespace Rendev
         public static readonly string STARTING_POSITION = "Geneva";
         public static readonly int STARTING_ZOOM = 10;
         public static readonly GMarkerGoogleType CLICK_MARKER_TYPE = GMarkerGoogleType.red_dot;
+        public static readonly GMarkerGoogleType EVENT_MARKER_TYPE = GMarkerGoogleType.blue_dot;
+
     }
 }

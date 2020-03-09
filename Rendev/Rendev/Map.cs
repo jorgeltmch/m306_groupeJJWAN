@@ -1,12 +1,7 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Rendev
@@ -49,6 +44,7 @@ namespace Rendev
         #region Constructors...
         public Map(GMapControl paramMapControl)
         {
+            _events = new List<GMapMarker>();
             _mapControl = paramMapControl;
             // Create overlay and bind it to the control
             _markers = new GMapOverlay("markers");
@@ -79,11 +75,21 @@ namespace Rendev
         /// </summary>
         /// <param name="paramPositionX"></param>
         /// <param name="paramPositionY"></param>
-        public void UpdateMouseClickMarkerPosition(int paramPositionX, int paramPositionY)
+        public void UpdateMouseClickMarkerPosition(PointLatLng paramPosition)
         {
             _markers.Markers.Remove(_mouseClickMarker);
-            _mouseClickMarker = new GMarkerGoogle(MapControl.FromLocalToLatLng(paramPositionX, paramPositionY), Constants.CLICK_MARKER_TYPE);
+            _mouseClickMarker = new GMarkerGoogle(paramPosition, Constants.CLICK_MARKER_TYPE);
             _markers.Markers.Add(MouseClickMarker);
+        }
+        public void UpdateMouseClickMarkerPosition(int paramPositionX, int paramPositionY)
+        {
+            UpdateMouseClickMarkerPosition(MapControl.FromLocalToLatLng(paramPositionX, paramPositionY));
+        }
+        public void AddMarkerAtLocation(PointLatLng paramPosition)
+        {
+            GMarkerGoogle _newMarker = new GMarkerGoogle(paramPosition, Constants.EVENT_MARKER_TYPE);
+            _events.Add(_newMarker);
+            _markers.Markers.Add(_newMarker);
         }
         /// <summary>
         /// Get the LatLong position of the mouseMarker
@@ -95,7 +101,7 @@ namespace Rendev
         }
         public void SetEventsMarker(List<PointLatLng> paramEventsPositions)
         {
-           //paramEventsPositions.ForEach()
+            paramEventsPositions.ForEach(AddMarkerAtLocation);
         }
         #endregion
 

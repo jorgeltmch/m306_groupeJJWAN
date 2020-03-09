@@ -158,7 +158,6 @@
             this.ModifMap.Size = new System.Drawing.Size(584, 368);
             this.ModifMap.TabIndex = 12;
             this.ModifMap.Zoom = 0D;
-            this.ModifMap.Load += new System.EventHandler(this.ModifMap_Load);
             // 
             // frmAddModif
             // 
