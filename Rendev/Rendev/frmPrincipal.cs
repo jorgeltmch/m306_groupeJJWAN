@@ -20,11 +20,12 @@ namespace Rendev
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
             ConnectionBD myConnec = ConnectionBD.getInstance();
-            //label1.Text = myConnec.getValues();
+            myConnec.getValues("rendev.evenement");
             //myConnec.changeValues();
             //myConnec.InsertDataEvent();
             //myConnec.Update();
-            myConnec.Delete();
+            //myConnec.Delete();
+            //label1.Text = myConnec.CountIdEvent().ToString();
         }
         private void AddMap_Load(object sender, EventArgs e)
         {

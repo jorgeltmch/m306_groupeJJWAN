@@ -19,11 +19,12 @@ namespace Rendev
     {
         private static ConnectionBD instance;
 
+        // connection à la basse de donnée
         private string sDatabase = "server=hibou.lab.ecinf.ch;database=rendev;port=3307;userid=rendev;password=Super2020?";
 
         private ConnectionBD()
         {
-                
+
         }
 
         public static ConnectionBD getInstance()
@@ -34,49 +35,121 @@ namespace Rendev
             return instance;
         }
 
-        public string getValues()
+        public Dictionary<int,Dictionary<string, string>> getValues(string nomTable)
+        {
+            Dictionary<int, Dictionary<string,string>> dicoIdentifiant = new Dictionary<int, Dictionary<string, string>>();
+            Dictionary<string, string> dicoValeurIdentrifiant = new Dictionary<string, string>();
+
+
+            string myConnection = sDatabase;
+
+            string sql = "Select * From " + nomTable;
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            myReader.Read();
+
+
+            switch (nomTable)
+            {
+                case "rendev.evenement":
+                    for (int i = 0; i < CountIdEvent(); i++)
+                    {
+                        while (myReader.Read())
+                        {
+                            dicoValeurIdentrifiant.Add(myReader[i],);
+                        }
+                        dicoIdentifiant.Add(i, dicoValeurIdentrifiant);
+                    }
+                    break;
+                case "rendev.position":
+                    for (int i = 0; i < CountIdPosition(); i++)
+                    {
+
+                    }
+                    break;
+                case "rendev.categorie":
+                    for (int i = 0; i < CountIdCategorie(); i++)
+                    {
+
+                    }
+                    break;
+            }
+            
+            return dicoIdentifiant;
+        }
+        
+        #region Avoir le nombre de id de chaque table
+        public int CountIdEvent()
         {
             string myConnection = sDatabase;
 
+            string sql = "Select COUNT(idEvent) From rendev.evenement";
+
             MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
             myConn.Open();
+            
+            myReader = myCommand.ExecuteReader();
 
-            MySqlCommand sql = new MySqlCommand("Select nomEvent From evenement", myConn);
-            MySqlDataReader dr;
-            dr = sql.ExecuteReader();
+            myReader.Read();
 
-            dr.Read();
-
-            return dr["nomEvent"].ToString();
+            return Convert.ToInt32(myReader[0].ToString());
         }
 
-        public void changeValues()
+        public int CountIdPosition()
         {
             string myConnection = sDatabase;
 
+            string sql = "Select COUNT(idEvent) From rendev.position";
+
             MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
             myConn.Open();
 
-            MySqlCommand sql = new MySqlCommand("Update evenement set nomEvent=Conf23 where idEvent=1", myConn);
+            myReader = myCommand.ExecuteReader();
 
-            MySqlDataAdapter mda = new MySqlDataAdapter();
-            mda.UpdateCommand = sql;
+            myReader.Read();
+
+            return Convert.ToInt32(myReader[0].ToString());
         }
 
+        public int CountIdCategorie()
+        {
+            string myConnection = sDatabase;
+
+            string sql = "Select COUNT(idEvent) From rendev.categorie";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            myReader.Read();
+
+            return Convert.ToInt32(myReader[0].ToString());
+        }
+        #endregion
+
+        #region Méthodes Insert
         public void InsertDataEvent(string nameEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
         {
             string myConnection = sDatabase;
 
-
-            // Valeur pour faire les test
-            //int idEvent = 3;
-            //string nom = "Testage";
-            //string description = "testage est present";
-            //DateTime date = new DateTime(2020, 03, 02);
-            //int position = 1;
-            //int categorie = 1;
-
-            string sql = "insert into rendev.evenement(idEvent, nomEvent, descriptionEvent, dateEvent, idPosition, idCategorie) values('" + CountIdEvent()+1 + "','"+ nameEvent + "','"+ descriptionEvent + "','"+date.ToString("yyyy-MM-dd")+"','"+ idPosition + "','"+ idCategorie + "')";
+            string sql = "insert into rendev.evenement(idEvent, nomEvent, descriptionEvent, dateEvent, idPosition, idCategorie) values('" + CountIdEvent() + 1 + "','" + nameEvent + "','" + descriptionEvent + "','" + date.ToString("yyyy-MM-dd") + "','" + idPosition + "','" + idCategorie + "')";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -90,37 +163,50 @@ namespace Rendev
             myConn.Close();
         }
 
-        public int CountIdEvent()
+        public void InsertDataPosition(string latitude, int longitude)
         {
             string myConnection = sDatabase;
+
+            string sql = "insert into rendev.evenement(idEvent, latitude, longitude) values('" + CountIdPosition() + 1 + "','" + latitude + "','" + longitude + "')";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
             myConn.Open();
 
-            MySqlCommand sql = new MySqlCommand("Select COUNT(idEvent) From evenement", myConn);
-            MySqlDataReader dr;
-            dr = sql.ExecuteReader();
+            myReader = myCommand.ExecuteReader();
 
-            dr.Read();
-
-            return (int)dr["COUNT(idEvent)"];
+            myConn.Close();
         }
-        
 
-        public void Update()
+        public void InsertDataCategorie(string nomCategorie)
         {
             string myConnection = sDatabase;
 
+            string sql = "insert into rendev.evenement(idEvent, nomCategorie, imageCategorie) values('" + CountIdPosition() + 1 + "','" + nomCategorie + "','undifined.png')";
 
-            int idEvent = 4;
-            string nom = "ça marche ?";
-            //string description = "testage est present";
-            //DateTime date = new DateTime(2020, 03, 02);
-            //int position = 1;
-            //int categorie = 1;
+            MySqlConnection myConn = new MySqlConnection(myConnection);
 
-            string sql = "update rendev.evenement set nomEvent='"+nom+"' where idEvent='"+idEvent+"'";
-            
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            myConn.Close();
+        }
+        #endregion
+
+        #region Méthodes Update
+        public void UpdateEvent(int idEvent, string nomEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "update rendev.evenement set nomEvent='" + nomEvent + "', descriptionEvent='" + descriptionEvent + "', dateEvent='" + date.ToString("yyyy-MM-dd") + "', idPosition='" + idPosition + "', idCategorie='" + idCategorie + "' where idEvent='" + idEvent + "'";
+
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
             MySqlDataReader myReader;
@@ -129,13 +215,27 @@ namespace Rendev
             myConn.Close();//Connection closed here 
         }
 
-        public void Delete()
+        public void UpdatePosition(int idPosition, int latitude, int logitude)
         {
             string myConnection = sDatabase;
-            
-            int idEvent = 4;
 
-            string sql = "delete from rendev.evenement where idEvent='" + idEvent + "';";
+            string sql = "update rendev.position set latitude='" + latitude + "', longitude='" + logitude + "' where idEvent='" + idPosition + "'";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+            myConn.Open();
+            myReader = myCommand.ExecuteReader();
+            myConn.Close();//Connection closed here 
+        }
+        #endregion
+
+        #region Methodes Delete
+        public void DeleteEvenement(string nomEvent)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "delete from rendev.evenement where nomEvent='" + nomEvent + "';";
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
             MySqlDataReader myReader;
@@ -143,5 +243,19 @@ namespace Rendev
             myReader = myCommand.ExecuteReader();
             myConn.Close();
         }
+
+        public void DeletePosition(int idPosition)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "delete from rendev.position where idPosition='" + idPosition + "';";
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+            myConn.Open();
+            myReader = myCommand.ExecuteReader();
+            myConn.Close();
+        }
+        #endregion
     }
 }
