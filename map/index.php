@@ -19,19 +19,24 @@ var_dump($events);
   </head>
   <body>
     <div id="map" class="map"></div>
+    <div id="status">
+    </div>
 	<div id="popup" class="ol-popup">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
       <div id="popup-content"></div>
     </div>
     <script type="text/javascript"  >
 
+            /**
+ * Elements that make up the popup.
+ */
+
+
 var events = <?php echo json_encode($events); ?>;
 
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
-
-
 
 
 /**
@@ -50,11 +55,7 @@ var overlay = new ol.Overlay({
  * Add a click handler to hide the popup.
  * @return {boolean} Don't follow the href.
  */
-closer.onclick = function() {
-  overlay.setPosition(undefined);
-  closer.blur();
-  return false;
-};
+
 
 
     var map = new ol.Map({
@@ -68,23 +69,13 @@ closer.onclick = function() {
     
     //Vue spawn
     view: new ol.View({
-      center: ol.proj.fromLonLat([6.1667, 46.2]),
+      center: ol.proj.fromLonLat([6.1667, 46.2]), // AJOUTER LAT LONG DEPUIS LA BASE
       zoom: 12
     })
   });
 
 
 
-/**
- * Add a click handler to the map to render the popup.
- */
- map.on('singleclick', function(evt) {
-  var coordinate = evt.coordinate;
-  var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-
-  content.innerHTML = "<img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b>" + hdms + " </b></h4> <p>Architect & Engineer</p></div>"  ;
-  overlay.setPosition(coordinate);
-});
   
   // Positions
   // AJOUTER LAT LONG DEPUIS LA BASE
@@ -111,27 +102,59 @@ closer.onclick = function() {
       })
     ]
   });
-
-  //var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-  //layer.innerHTML = "<img src='img/paris.jpg' alt='Avatar' style='width:100%''> <div class='container'> <h4><b> </b></h4> <p>Architect & Engineer</p></div>"  ;
   // ajout layer
   map.addLayer(layer);
 }
 
-	// Ajout des positions via la fonction 
-  // AddLayer(centerLongitudeLatitude);
-  // AddLayer(centerLongitudeLatitude2);
-  for (var i = 0; i < events.length; i++){
-    var obj = events[i];
-    var lat = obj.latitude;
-    var lon = obj.longitude;
+var highlightStyle = new ol.style.Style({
+  fill: new ol.style.Fill({
+    color: 'rgba(255,255,255,0.7)'
+  }),
+  stroke: new ol.style.Stroke({
+    color: '#3399CC',
+    width: 3
+  })
+});
 
+var selected = null;
+var status = document.getElementById('status');
 
-
-    var x = ol.proj.fromLonLat([ lon , lat]);
-    AddLayer(x);
-
+map.on('pointermove', function(e) {
+  if (selected !== null) {
+    selected.setStyle(undefined);
+    selected = null;
   }
+
+  map.forEachFeatureAtPixel(e.pixel, function(f) {
+    selected = f;
+    f.setStyle(highlightStyle);
+    return true;
+  });
+
+  if (selected) {
+    var coordinate = e.coordinate;
+    var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
+    status.innerHTML = '<p>test</p>'
+  } else {
+    status.innerHTML = '&nbsp;';
+  }
+});
+
+for (var i = 0; i < events.length; i++){
+  var obj = events[i];
+  var lat = obj.latitude;
+  var lon = obj.longitude;
+
+
+
+  var x = ol.proj.fromLonLat([ lon , lat]);
+  AddLayer(x);
+
+}
+
+	// Ajout des positions via la fonction 
+  //AddLayer(centerLongitudeLatitude);
+  //AddLayer(centerLongitudeLatitude2);
 
 
     </script>
