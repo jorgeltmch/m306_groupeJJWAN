@@ -24,8 +24,17 @@ namespace Rendev
 
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
-            ConnectionBD myConnec = ConnectionBD.getInstance();
-            myConnec.getValues("rendev.evenement");
+            frmAddModif frmAdd = new frmAddModif();
+            if (_map.MouseClickMarker != null)
+            {
+                frmAdd.Map.UpdateMouseClickMarkerPosition(_map.MouseClickMarker.Position);
+                if (frmAdd.ShowDialog() == DialogResult.OK)
+                {
+                }
+            }
+
+            //ConnectionBD myConnec = ConnectionBD.getInstance();
+            //myConnec.getValues("rendev.evenement");
             //myConnec.changeValues();
             //myConnec.InsertDataEvent();
             //myConnec.Update();
