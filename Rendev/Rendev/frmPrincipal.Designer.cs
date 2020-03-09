@@ -1,4 +1,6 @@
-﻿namespace Rendev
+﻿using System;
+
+namespace Rendev
 {
     partial class frmPrincipal
     {
@@ -28,19 +30,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddEvent = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.AddMap = new GMap.NET.WindowsForms.GMapControl();
+            this.btnAddEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnAddEvent
+            // label1
             // 
-            this.btnAddEvent.Location = new System.Drawing.Point(602, 398);
-            this.btnAddEvent.Name = "btnAddEvent";
-            this.btnAddEvent.Size = new System.Drawing.Size(132, 31);
-            this.btnAddEvent.TabIndex = 1;
-            this.btnAddEvent.Text = "Ajout Event";
-            this.btnAddEvent.UseVisualStyleBackColor = true;
-            this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 407);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
             // 
             // AddMap
             // 
@@ -67,13 +69,23 @@
             this.AddMap.Size = new System.Drawing.Size(722, 380);
             this.AddMap.TabIndex = 2;
             this.AddMap.Zoom = 0D;
-            this.AddMap.Load += new System.EventHandler(this.AddMap_Load);
+            // 
+            // btnAddEvent
+            // 
+            this.btnAddEvent.Location = new System.Drawing.Point(602, 398);
+            this.btnAddEvent.Name = "btnAddEvent";
+            this.btnAddEvent.Size = new System.Drawing.Size(132, 31);
+            this.btnAddEvent.TabIndex = 1;
+            this.btnAddEvent.Text = "Ajout Event";
+            this.btnAddEvent.UseVisualStyleBackColor = true;
+            this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 441);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.AddMap);
             this.Controls.Add(this.btnAddEvent);
             this.MaximizeBox = false;
@@ -81,11 +93,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rendev";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button btnAddEvent;
+        private System.Windows.Forms.Label label1;
         private GMap.NET.WindowsForms.GMapControl AddMap;
     }
 }
