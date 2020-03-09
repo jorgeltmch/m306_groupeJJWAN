@@ -25,7 +25,7 @@ namespace Rendev
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
             ConnectionBD myConnec = ConnectionBD.getInstance();
-            myConnec.getValues("rendev.evenement");
+            label1.Text = myConnec.SelectChampEvent(1, "nomEvent");
             //myConnec.changeValues();
             //myConnec.InsertDataEvent();
             //myConnec.Update();
