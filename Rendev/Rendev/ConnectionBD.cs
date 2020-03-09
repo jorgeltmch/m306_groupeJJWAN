@@ -63,7 +63,7 @@ namespace Rendev
                     {
                         while (myReader.Read())
                         {
-                            dicoValeurIdentrifiant.Add(myReader[i],);
+                            //dicoValeurIdentrifiant.Add(myReader[i],);
                         }
                         dicoIdentifiant.Add(i, dicoValeurIdentrifiant);
                     }
