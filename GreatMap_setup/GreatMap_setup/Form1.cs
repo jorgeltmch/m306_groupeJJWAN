@@ -20,14 +20,11 @@ namespace GreatMap_setup
         private void Form1_Load(object sender, EventArgs e)
         {
             map.ShowCenter = false;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            map.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-            //map.Position = new GMap.NET.PointLatLng(46.195566, 6.110237);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GMap.NET.GeoCoderStatusCode geocode = map.SetPositionByKeywords("USA");
+            map.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            GMap.NET.MapProviders.GMapProvider.UserAgent = "RenDev";
+            map.MapProvider.RefererUrl = "MhMq4p3g07Z9KsKTwy9CNpMs32Fz2VSuh70rAd5h";
+            GMap.NET.GeoCoderStatusCode geocode = map.SetPositionByKeywords("Geneva");
         }
     }
 }
