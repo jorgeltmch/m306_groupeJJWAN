@@ -35,56 +35,6 @@ namespace Rendev
             return instance;
         }
 
-        public Dictionary<int,Dictionary<string, string>> getValues(string nomTable)
-        {
-            Dictionary<int, Dictionary<string,string>> dicoIdentifiant = new Dictionary<int, Dictionary<string, string>>();
-            Dictionary<string, string> dicoValeurIdentrifiant = new Dictionary<string, string>();
-
-
-            string myConnection = sDatabase;
-
-            string sql = "Select * From " + nomTable;
-
-            MySqlConnection myConn = new MySqlConnection(myConnection);
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
-
-            myConn.Open();
-
-            myReader = myCommand.ExecuteReader();
-
-            myReader.Read();
-
-
-            switch (nomTable)
-            {
-                case "rendev.evenement":
-                    for (int i = 0; i < CountIdEvent(); i++)
-                    {
-                        while (myReader.Read())
-                        {
-                            //dicoValeurIdentrifiant.Add(myReader[i],);
-                        }
-                        dicoIdentifiant.Add(i, dicoValeurIdentrifiant);
-                    }
-                    break;
-                case "rendev.position":
-                    for (int i = 0; i < CountIdPosition(); i++)
-                    {
-
-                    }
-                    break;
-                case "rendev.categorie":
-                    for (int i = 0; i < CountIdCategorie(); i++)
-                    {
-
-                    }
-                    break;
-            }
-            
-            return dicoIdentifiant;
-        }
-        
         #region Avoir le nombre de id de chaque table
         public int CountIdEvent()
         {
@@ -97,7 +47,7 @@ namespace Rendev
             MySqlDataReader myReader;
 
             myConn.Open();
-            
+
             myReader = myCommand.ExecuteReader();
 
             myReader.Read();
@@ -141,6 +91,73 @@ namespace Rendev
             myReader.Read();
 
             return Convert.ToInt32(myReader[0].ToString());
+        }
+        #endregion
+
+        #region Méthodes Select
+        public string SelectChampEvent(int idEvent, string typeValue)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "Select * From rendev.evenement WHERE idEvent = "+ idEvent +"";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            myReader.Read();
+            
+            return myReader[typeValue].ToString();
+
+            myConn.Close();
+
+        }
+
+        public string SelectChampCategory(int idCategorie, string typeValue)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "Select * From rendev.categorie WHERE idCategorie = " + idCategorie + "";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            return myReader[typeValue].ToString();
+
+            myConn.Close();
+
+        }
+
+        public string SelectChampPosition(int idPosition, string typeValue)
+        {
+            string myConnection = sDatabase;
+
+            string sql = "Select * From rendev.categorie WHERE idPosition = " + idPosition + "";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            return myReader[typeValue].ToString();
+
+            myConn.Close();
+
         }
         #endregion
         #region Méthodes Insert

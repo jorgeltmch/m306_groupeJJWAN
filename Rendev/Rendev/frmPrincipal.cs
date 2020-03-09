@@ -32,14 +32,6 @@ namespace Rendev
                 {
                 }
             }
-
-            //ConnectionBD myConnec = ConnectionBD.getInstance();
-            //myConnec.getValues("rendev.evenement");
-            //myConnec.changeValues();
-            //myConnec.InsertDataEvent();
-            //myConnec.Update();
-            //myConnec.Delete();
-            //label1.Text = myConnec.CountIdEvent().ToString();
         }
     }
 }
