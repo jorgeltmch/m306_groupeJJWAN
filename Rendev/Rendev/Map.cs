@@ -1,6 +1,8 @@
 ﻿using GMap.NET;
+using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -102,6 +104,16 @@ namespace Rendev
         public void SetEventsMarker(List<PointLatLng> paramEventsPositions)
         {
             paramEventsPositions.ForEach(AddMarkerAtLocation);
+        }
+        public string GetAddressFromLatLon(PointLatLng paramPosition)
+        {
+            GeoCoderStatusCode status;
+            var address = OpenStreetMapProvider.Instance.GetPlacemark(paramPosition, out status);
+            if (status == GeoCoderStatusCode.G_GEO_SUCCESS && address != null)
+            {
+                return address.Value.Address;
+            }
+            throw new ArgumentException("Can't find address at : " + paramPosition.Lat + ", " + paramPosition.Lng);
         }
         #endregion
 

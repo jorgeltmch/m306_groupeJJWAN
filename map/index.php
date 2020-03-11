@@ -69,7 +69,7 @@ var overlay = new ol.Overlay({
     
     //Vue spawn
     view: new ol.View({
-      center: ol.proj.fromLonLat([6.1667, 46.2]), // AJOUTER LAT LONG DEPUIS LA BASE
+      center: ol.proj.fromLonLat([6.1667, 46.2]), 
       zoom: 12
     })
   });
@@ -77,15 +77,12 @@ var overlay = new ol.Overlay({
 
 
   
-  // Positions
-  // AJOUTER LAT LONG DEPUIS LA BASE
-  var centerLongitudeLatitude = ol.proj.fromLonLat([6.055692, 46.233058]);
-  var centerLongitudeLatitude2 = ol.proj.fromLonLat([6.255692, 46.233058]);
   
   // Affichage
   
   function AddLayer(position) {
     var layer = new ol.layer.Vector({
+    
     source: new ol.source.Vector({
       projection: 'EPSG:4326',
       features: [new ol.Feature(new ol.geom.Circle(position, 1000))]

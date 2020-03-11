@@ -160,7 +160,6 @@ namespace Rendev
 
         }
         #endregion
-
         #region Méthodes Insert
         public void InsertDataEvent(string nameEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
         {
@@ -180,7 +179,7 @@ namespace Rendev
             myConn.Close();
         }
 
-        public void InsertDataPosition(string latitude, int longitude)
+        public void InsertDataPosition(double latitude, double longitude)
         {
             string myConnection = sDatabase;
 

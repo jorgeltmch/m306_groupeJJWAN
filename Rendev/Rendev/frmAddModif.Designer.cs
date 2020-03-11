@@ -180,6 +180,7 @@
             this.Name = "frmAddModif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAddModif";
+            this.Load += new System.EventHandler(this.frmAddModif_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

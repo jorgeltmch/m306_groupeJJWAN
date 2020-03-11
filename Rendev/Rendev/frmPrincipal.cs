@@ -24,13 +24,14 @@ namespace Rendev
 
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
-            ConnectionBD myConnec = ConnectionBD.getInstance();
-            label1.Text = myConnec.SelectChampEvent(1, "nomEvent");
-            //myConnec.changeValues();
-            //myConnec.InsertDataEvent();
-            //myConnec.Update();
-            //myConnec.Delete();
-            //label1.Text = myConnec.CountIdEvent().ToString();
+            frmAddModif frmAdd = new frmAddModif();
+            if (_map.MouseClickMarker != null)
+            {
+                frmAdd.Map.UpdateMouseClickMarkerPosition(_map.MouseClickMarker.Position);
+                if (frmAdd.ShowDialog() == DialogResult.OK)
+                {
+                }
+            }
         }
     }
 }
