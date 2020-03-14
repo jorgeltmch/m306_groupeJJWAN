@@ -15,10 +15,7 @@ namespace Rendev
         {
             InitializeComponent();
             _map = new Map(AddMap);
-            List<PointLatLng> events = new List<PointLatLng>();
-            events.Add(new PointLatLng(46.167333, 6.140081));
-            events.Add(new PointLatLng(46.176789, 6.095105));
-            _map.SetEventsMarker(events);
+            SetEventPoints();
         }
 
 
@@ -30,7 +27,17 @@ namespace Rendev
                 frmAdd.Map.UpdateMouseClickMarkerPosition(_map.MouseClickMarker.Position);
                 if (frmAdd.ShowDialog() == DialogResult.OK)
                 {
+                    SetEventPoints();
                 }
+            }
+        }
+        private void SetEventPoints()
+        {
+            ConnectionBD myConnec = ConnectionBD.getInstance();
+            List<PointLatLng> values = myConnec.GetAllEventPositions();
+            if (values != null)
+            {
+                _map.SetEventsMarker(values);
             }
         }
     }

@@ -35,8 +35,8 @@ namespace Rendev
             if (!string.IsNullOrEmpty(tbx.Text) && !string.IsNullOrEmpty(tbxDescriptionEvent.Text) && !string.IsNullOrEmpty(tbxNomEvent.Text) && cmbCategoriEvent.SelectedItem.ToString() != null && dtpDateEvent.Value != null)
             {
                 ConnectionBD myConnec = ConnectionBD.getInstance();
-                myConnec.InsertDataPosition(Map.MouseClickMarker.Position.Lat, Map.MouseClickMarker.Position.Lng);
-                //myConnec.InsertDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value);
+                int id = Convert.ToInt32(myConnec.InsertDataPosition(Map.MouseClickMarker.Position.Lat, Map.MouseClickMarker.Position.Lng));
+                myConnec.InsertDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value, id, (int)cmbCategoriEvent.SelectedValue);
             }
             else
             {
@@ -47,6 +47,7 @@ namespace Rendev
         private void frmAddModif_Load(object sender, EventArgs e)
         {
             UpdateAddress();
+            UpdateCategorie();
         }
         private void UpdateAddress()
         {
@@ -60,6 +61,17 @@ namespace Rendev
                 {
                     MessageBox.Show("Can't find the given address");
                 }
+            }
+        }
+        private void UpdateCategorie()
+        {
+            ConnectionBD myConnec = ConnectionBD.getInstance();
+            Dictionary<int, string> values = myConnec.GetAllCategoriesNames();
+            if (values != null)
+            {
+                cmbCategoriEvent.DataSource = new BindingSource(values, null);
+                cmbCategoriEvent.DisplayMember = "Value";
+                cmbCategoriEvent.ValueMember = "Key";
             }
         }
     }

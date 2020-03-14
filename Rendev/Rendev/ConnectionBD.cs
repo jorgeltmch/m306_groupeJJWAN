@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
 using MySql.Data.MySqlClient;
 
 
@@ -17,30 +18,31 @@ namespace Rendev
 {
     class ConnectionBD
     {
-        private static ConnectionBD instance;
+        private static ConnectionBD _instance;
 
         // connection à la basse de donnée
-        private string sDatabase = "server=hibou.lab.ecinf.ch;database=rendev;port=3307;userid=rendev;password=Super2020?";
+        //private string _sDatabase = "server=hibou.lab.ecinf.ch;database=rendev;port=3307;userid=rendev;password=Super2020?";
+        private string _sDatabase;
 
         private ConnectionBD()
         {
-
+            _sDatabase = Constants.CONNECTION_STRING;
         }
 
         public static ConnectionBD getInstance()
         {
-            if (instance == null)
-                instance = new ConnectionBD();
+            if (_instance == null)
+                _instance = new ConnectionBD();
 
-            return instance;
+            return _instance;
         }
 
         #region Avoir le nombre de id de chaque table
         public int CountIdEvent()
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select COUNT(idEvent) From rendev.evenement";
+            string sql = "Select COUNT(idEvenement) From evenement";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
@@ -57,9 +59,9 @@ namespace Rendev
 
         public int CountIdPosition()
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select COUNT(idEvent) From rendev.position";
+            string sql = "Select COUNT(idPosition) From position";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
@@ -76,9 +78,9 @@ namespace Rendev
 
         public int CountIdCategorie()
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select COUNT(idEvent) From rendev.categorie";
+            string sql = "Select COUNT(idCategorie) From categorie";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
@@ -97,9 +99,9 @@ namespace Rendev
         #region Méthodes Select
         public string SelectChampEvent(int idEvent, string typeValue)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select * From rendev.evenement WHERE idEvent = "+ idEvent +"";
+            string sql = "Select * From evenement WHERE idEvenement = "+ idEvent +"";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -120,9 +122,9 @@ namespace Rendev
 
         public string SelectChampCategory(int idCategorie, string typeValue)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select * From rendev.categorie WHERE idCategorie = " + idCategorie + "";
+            string sql = "Select * From categorie WHERE idCategorie = " + idCategorie + "";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -141,9 +143,9 @@ namespace Rendev
 
         public string SelectChampPosition(int idPosition, string typeValue)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "Select * From rendev.categorie WHERE idPosition = " + idPosition + "";
+            string sql = "Select * From position WHERE idPosition = " + idPosition + "";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -159,13 +161,61 @@ namespace Rendev
             myConn.Close();
 
         }
+        public Dictionary<int, string> GetAllCategoriesNames()
+        {
+            string myConnection = _sDatabase;
+            Dictionary<int, string> _returnValues = new Dictionary<int, string>();
+
+            string sql = "SELECT idCategorie, nomCategorie FROM categorie;";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+            
+            while (myReader.Read())
+            {
+                _returnValues.Add(Convert.ToInt32(myReader.GetString("idCategorie")), myReader.GetString("nomCategorie"));
+            }
+            return _returnValues;
+
+            myConn.Close();
+        }
+        public List<PointLatLng> GetAllEventPositions()
+        {
+            string myConnection = _sDatabase;
+            List<PointLatLng> _returnValues = new List<PointLatLng>();
+
+            string sql = "SELECT latitude, longitude FROM position;";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            while (myReader.Read())
+            {
+                _returnValues.Add(new PointLatLng(myReader.GetDouble("latitude"), myReader.GetDouble("longitude")));
+            }
+            return _returnValues;
+
+            myConn.Close();
+        }
         #endregion
         #region Méthodes Insert
         public void InsertDataEvent(string nameEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "insert into rendev.evenement(idEvent, nomEvent, descriptionEvent, dateEvent, idPosition, idCategorie) values('" + CountIdEvent() + 1 + "','" + nameEvent + "','" + descriptionEvent + "','" + date.ToString("yyyy-MM-dd") + "','" + idPosition + "','" + idCategorie + "')";
+            string sql = "insert into rendevdb.evenement(nomEvenement, descriptionEvenement, dateEvenement, idPosition, idCategorie) values('" + nameEvent + "','" + descriptionEvent + "','" + date.ToString("yyyy-MM-dd") + "','" + idPosition + "','" + idCategorie + "')";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -179,11 +229,11 @@ namespace Rendev
             myConn.Close();
         }
 
-        public void InsertDataPosition(double latitude, double longitude)
+        public long InsertDataPosition(double latitude, double longitude)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "insert into rendev.evenement(idEvent, latitude, longitude) values('" + CountIdPosition() + 1 + "','" + latitude + "','" + longitude + "')";
+            string sql = "insert into rendevdb.position(latitude, longitude) values('" + latitude + "','" + longitude + "')";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -194,14 +244,15 @@ namespace Rendev
 
             myReader = myCommand.ExecuteReader();
 
+            return myCommand.LastInsertedId;
             myConn.Close();
         }
 
         public void InsertDataCategorie(string nomCategorie)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "insert into rendev.evenement(idEvent, nomCategorie, imageCategorie) values('" + CountIdPosition() + 1 + "','" + nomCategorie + "','undifined.png')";
+            string sql = "insert into rendevdb.categorie(nomCategorie, imageCategorie) values('" + nomCategorie + "','undifined.png')";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
 
@@ -219,9 +270,9 @@ namespace Rendev
         #region Méthodes Update
         public void UpdateEvent(int idEvent, string nomEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "update rendev.evenement set nomEvent='" + nomEvent + "', descriptionEvent='" + descriptionEvent + "', dateEvent='" + date.ToString("yyyy-MM-dd") + "', idPosition='" + idPosition + "', idCategorie='" + idCategorie + "' where idEvent='" + idEvent + "'";
+            string sql = "update rendevdb.evenement set nomEvenement='" + nomEvent + "', descriptionEvenement='" + descriptionEvent + "', dateEvenement='" + date.ToString("yyyy-MM-dd") + "', idPosition='" + idPosition + "', idCategorie='" + idCategorie + "' where idEvenement='" + idEvent + "'";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
@@ -233,9 +284,9 @@ namespace Rendev
 
         public void UpdatePosition(int idPosition, int latitude, int logitude)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "update rendev.position set latitude='" + latitude + "', longitude='" + logitude + "' where idEvent='" + idPosition + "'";
+            string sql = "update rendevdb.position set latitude='" + latitude + "', longitude='" + logitude + "' where idEvenement='" + idPosition + "'";
 
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
@@ -249,9 +300,9 @@ namespace Rendev
         #region Methodes Delete
         public void DeleteEvenement(string nomEvent)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "delete from rendev.evenement where nomEvent='" + nomEvent + "';";
+            string sql = "delete from rendevdb.evenement where nomEvenement='" + nomEvent + "';";
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
             MySqlDataReader myReader;
@@ -262,9 +313,9 @@ namespace Rendev
 
         public void DeletePosition(int idPosition)
         {
-            string myConnection = sDatabase;
+            string myConnection = _sDatabase;
 
-            string sql = "delete from rendev.position where idPosition='" + idPosition + "';";
+            string sql = "delete from rendevdb.position where idPosition='" + idPosition + "';";
             MySqlConnection myConn = new MySqlConnection(myConnection);
             MySqlCommand myCommand = new MySqlCommand(sql, myConn);
             MySqlDataReader myReader;
