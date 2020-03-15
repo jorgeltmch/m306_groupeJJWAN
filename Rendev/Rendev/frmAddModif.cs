@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GMap.NET;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,13 @@ namespace Rendev
     public partial class frmAddModif : Form
     {
         private Map _map;
+        private bool _isAdding;
         internal Map Map { get => _map; set => _map = value; }
 
-        public frmAddModif()
+        public frmAddModif(bool paramIsAdding)
         {
             InitializeComponent();
+            _isAdding = paramIsAdding;
             Map = new Map(ModifMap);
             Map.MapControl.MouseClick += MapControl_MouseClick;
         }
@@ -34,13 +37,15 @@ namespace Rendev
         {
             if (!string.IsNullOrEmpty(tbx.Text) && !string.IsNullOrEmpty(tbxDescriptionEvent.Text) && !string.IsNullOrEmpty(tbxNomEvent.Text) && cmbCategoriEvent.SelectedItem.ToString() != null && dtpDateEvent.Value != null)
             {
-                ConnectionBD myConnec = ConnectionBD.getInstance();
-                int id = Convert.ToInt32(myConnec.InsertDataPosition(Map.MouseClickMarker.Position.Lat, Map.MouseClickMarker.Position.Lng));
-                myConnec.InsertDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value, id, (int)cmbCategoriEvent.SelectedValue);
+                if (_isAdding)
+                {
+                    int id = Convert.ToInt32(DataManager.GetInstance().AddDataPosition(Map.MouseClickMarker.Position.Lat, Map.MouseClickMarker.Position.Lng));
+                    DataManager.GetInstance().AddDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value, id, (int) cmbCategoriEvent.SelectedValue);
+                }
             }
             else
             {
-                MessageBox.Show("Tous les champs doivent être remplis pour pouvoir créer l'évenement");
+                MessageBox.Show("Tous les champs doivent être remplis pour pouvoir créer/modifier l'évenement");
             }
         }
 
@@ -65,14 +70,33 @@ namespace Rendev
         }
         private void UpdateCategorie()
         {
-            ConnectionBD myConnec = ConnectionBD.getInstance();
-            Dictionary<int, string> values = myConnec.GetAllCategoriesNames();
+            List<Category> values = DataManager.GetInstance().Categories;
             if (values != null)
             {
                 cmbCategoriEvent.DataSource = new BindingSource(values, null);
-                cmbCategoriEvent.DisplayMember = "Value";
-                cmbCategoriEvent.ValueMember = "Key";
+                cmbCategoriEvent.DisplayMember = "Name";
+                cmbCategoriEvent.ValueMember = "Id";
             }
+        }
+        public string GetName()
+        {
+            return tbxNomEvent.Text;
+        }
+        public string GetDecription()
+        {
+            return tbxDescriptionEvent.Text;
+        }
+        public PointLatLng GetPosition()
+        {
+            return Map.MouseClickMarker.Position;
+        }
+        public Category GetCategory()
+        {
+            return DataManager.GetInstance().GetCategoryByIdIfExist((int)cmbCategoriEvent.SelectedValue);
+        }
+        public DateTime GetDate()
+        {
+            return dtpDateEvent.Value;
         }
     }
 }

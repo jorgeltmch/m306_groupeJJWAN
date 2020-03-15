@@ -15,29 +15,20 @@ namespace Rendev
         {
             InitializeComponent();
             _map = new Map(AddMap);
-            SetEventPoints();
+            _map.SynchronizeMapEventsWithServer();
         }
 
 
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
-            frmAddModif frmAdd = new frmAddModif();
+            frmAddModif frmAdd = new frmAddModif(true);
             if (_map.MouseClickMarker != null)
             {
                 frmAdd.Map.UpdateMouseClickMarkerPosition(_map.MouseClickMarker.Position);
                 if (frmAdd.ShowDialog() == DialogResult.OK)
                 {
-                    SetEventPoints();
+                    _map.SynchronizeMapEventsWithServer();
                 }
-            }
-        }
-        private void SetEventPoints()
-        {
-            ConnectionBD myConnec = ConnectionBD.getInstance();
-            List<PointLatLng> values = myConnec.GetAllEventPositions();
-            if (values != null)
-            {
-                _map.SetEventsMarker(values);
             }
         }
     }

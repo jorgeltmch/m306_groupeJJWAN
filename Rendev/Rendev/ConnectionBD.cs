@@ -100,23 +100,30 @@ namespace Rendev
         public string SelectChampEvent(int idEvent, string typeValue)
         {
             string myConnection = _sDatabase;
+            try
+            {
+                string sql = "Select * From evenement WHERE idEvenement = " + idEvent + "";
 
-            string sql = "Select * From evenement WHERE idEvenement = "+ idEvent +"";
+                MySqlConnection myConn = new MySqlConnection(myConnection);
 
-            MySqlConnection myConn = new MySqlConnection(myConnection);
+                MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+                MySqlDataReader myReader;
 
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
+                myConn.Open();
 
-            myConn.Open();
+                myReader = myCommand.ExecuteReader();
 
-            myReader = myCommand.ExecuteReader();
+                myReader.Read();
 
-            myReader.Read();
-            
-            return myReader[typeValue].ToString();
+                return myReader[typeValue].ToString();
 
-            myConn.Close();
+                myConn.Close();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
 
         }
 
@@ -124,47 +131,63 @@ namespace Rendev
         {
             string myConnection = _sDatabase;
 
-            string sql = "Select * From categorie WHERE idCategorie = " + idCategorie + "";
+            try
+            {
+                string sql = "Select * From categorie WHERE idCategorie = " + idCategorie + "";
 
-            MySqlConnection myConn = new MySqlConnection(myConnection);
+                MySqlConnection myConn = new MySqlConnection(myConnection);
 
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
+                MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+                MySqlDataReader myReader;
 
-            myConn.Open();
+                myConn.Open();
 
-            myReader = myCommand.ExecuteReader();
+                myReader = myCommand.ExecuteReader();
+                myReader.Read();
 
-            return myReader[typeValue].ToString();
+                return myReader[typeValue].ToString();
 
-            myConn.Close();
-
+                myConn.Close();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public string SelectChampPosition(int idPosition, string typeValue)
         {
             string myConnection = _sDatabase;
 
-            string sql = "Select * From position WHERE idPosition = " + idPosition + "";
+            try
+            {
+                string sql = "Select * From position WHERE idPosition = " + idPosition + "";
 
-            MySqlConnection myConn = new MySqlConnection(myConnection);
+                MySqlConnection myConn = new MySqlConnection(myConnection);
 
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
+                MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+                MySqlDataReader myReader;
 
-            myConn.Open();
+                myConn.Open();
 
-            myReader = myCommand.ExecuteReader();
+                myReader = myCommand.ExecuteReader();
+                myReader.Read();
 
-            return myReader[typeValue].ToString();
+                return myReader[typeValue].ToString();
 
-            myConn.Close();
+                myConn.Close();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
         }
-        public Dictionary<int, string> GetAllCategoriesNames()
+        public List<Category> GetAllCategories()
         {
             string myConnection = _sDatabase;
-            Dictionary<int, string> _returnValues = new Dictionary<int, string>();
+            List<Category> _returnValues = new List<Category>();
 
             string sql = "SELECT idCategorie, nomCategorie FROM categorie;";
 
@@ -176,10 +199,34 @@ namespace Rendev
             myConn.Open();
 
             myReader = myCommand.ExecuteReader();
-            
+
             while (myReader.Read())
             {
-                _returnValues.Add(Convert.ToInt32(myReader.GetString("idCategorie")), myReader.GetString("nomCategorie"));
+                _returnValues.Add(new Category(Convert.ToInt32(myReader.GetString("idCategorie")), myReader.GetString("nomCategorie"), Constants.EVENT_MARKER_TYPE));
+            }
+            return _returnValues;
+
+            myConn.Close();
+        }
+        public List<Position> GetAllPositions()
+        {
+            string myConnection = _sDatabase;
+            List<Position> _returnValues = new List<Position>();
+
+            string sql = "Select * From position;";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            while (myReader.Read())
+            {
+                _returnValues.Add(new Position(Convert.ToInt32(myReader.GetString("idPosition")), new PointLatLng(myReader.GetDouble("latitude"), myReader.GetDouble("longitude"))));
             }
             return _returnValues;
 
@@ -209,9 +256,46 @@ namespace Rendev
 
             myConn.Close();
         }
+        public List<Event> GetAllEvents()
+        {
+            string myConnection = _sDatabase;
+            List<Event> _returnValues = new List<Event>();
+
+            string sql = "SELECT idEvenement, nomEvenement, descriptionEvenement, dateEvenement, evenement.idPosition, latitude, longitude, evenement.idCategorie, nomCategorie, ImageCategorie FROM evenement JOIN position ON position.idPosition = evenement.idPosition JOIN categorie ON categorie.idCategorie = evenement.idCategorie";
+
+            MySqlConnection myConn = new MySqlConnection(myConnection);
+
+            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
+            MySqlDataReader myReader;
+
+            myConn.Open();
+
+            myReader = myCommand.ExecuteReader();
+
+            while (myReader.Read())
+            {
+                Category eventCategory = DataManager.GetInstance().GetCategoryByIdIfExist(myReader.GetInt32("idCategorie"));
+                if (eventCategory == null)
+                {
+                    eventCategory = new Category(myReader.GetInt32("idCategorie"), myReader.GetString("nomCategorie"), Constants.EVENT_MARKER_TYPE);
+                    DataManager.GetInstance().Categories.Add(eventCategory);
+                }
+                Position eventPosition = DataManager.GetInstance().GetPositionByIdIfExist(myReader.GetInt32("idPosition"));
+                if (eventPosition == null)
+                {
+                    eventPosition = new Position(myReader.GetInt32("idPosition"), new PointLatLng(myReader.GetDouble("latitude"), myReader.GetDouble("longitude")));
+                    DataManager.GetInstance().Positions.Add(eventPosition);
+                }
+
+                _returnValues.Add(new Event(myReader.GetInt32("idEvenement"), myReader.GetString("nomEvenement"), eventCategory, myReader.GetString("descriptionEvenement"), myReader.GetDateTime("dateEvenement"), eventPosition));
+            }
+            return _returnValues;
+
+            myConn.Close();
+        }
         #endregion
         #region Méthodes Insert
-        public void InsertDataEvent(string nameEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
+        public long InsertDataEvent(string nameEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
         {
             string myConnection = _sDatabase;
 
@@ -226,6 +310,7 @@ namespace Rendev
 
             myReader = myCommand.ExecuteReader();
 
+            return myCommand.LastInsertedId;
             myConn.Close();
         }
 
@@ -248,7 +333,7 @@ namespace Rendev
             myConn.Close();
         }
 
-        public void InsertDataCategorie(string nomCategorie)
+        public long InsertDataCategorie(string nomCategorie)
         {
             string myConnection = _sDatabase;
 
@@ -262,15 +347,24 @@ namespace Rendev
             myConn.Open();
 
             myReader = myCommand.ExecuteReader();
+            return myCommand.LastInsertedId;
 
             myConn.Close();
         }
         #endregion
 
         #region Méthodes Update
-        public void UpdateEvent(int idEvent, string nomEvent, string descriptionEvent, DateTime date, int idPosition, int idCategorie)
+        public void UpdateEvent(int idEvent, string nomEvent, string descriptionEvent, DateTime date, Position position, Category categorie)
         {
             string myConnection = _sDatabase;
+
+            long idCategorie = categorie.Id;
+            string idcat = SelectChampCategory(categorie.Id, "idCategorie");
+            if (idcat != categorie.Id.ToString())
+            {
+                idCategorie = InsertDataCategorie(categorie.Name);
+            }
+            long idPosition = InsertDataPosition(position.PointLatLng.Lat, position.PointLatLng.Lng);
 
             string sql = "update rendevdb.evenement set nomEvenement='" + nomEvent + "', descriptionEvenement='" + descriptionEvent + "', dateEvenement='" + date.ToString("yyyy-MM-dd") + "', idPosition='" + idPosition + "', idCategorie='" + idCategorie + "' where idEvenement='" + idEvent + "'";
 

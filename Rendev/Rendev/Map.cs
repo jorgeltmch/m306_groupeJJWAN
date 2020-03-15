@@ -13,6 +13,7 @@ namespace Rendev
     /// </summary>
     class Map
     {
+
         #region Fields...
         private GMapOverlay _markers;
         private GMapMarker _mouseClickMarker;
@@ -70,8 +71,10 @@ namespace Rendev
             _mapControl.SetPositionByKeywords(Constants.STARTING_POSITION);
             _mapControl.Zoom = Constants.STARTING_ZOOM;
 
-            _mapControl.MouseClick += MapControl_MouseClick;
+           _mapControl.MouseClick += MapControl_MouseClick;
+            _mapControl.OnMarkerClick += _mapControl_OnMarkerClick;
         }
+
         /// <summary>
         /// Update the main marker to the given mouse position
         /// </summary>
@@ -105,7 +108,16 @@ namespace Rendev
         {
             paramEventsPositions.ForEach(AddMarkerAtLocation);
         }
-        public string GetAddressFromLatLon(PointLatLng paramPosition)
+        public void SynchronizeMapEventsWithServer()
+        {
+            List<PointLatLng> values = DataManager.GetInstance().GetEventsPosition();
+            _markers.Markers.Clear();
+            if (values != null)
+            {
+                SetEventsMarker(values);
+            }
+        }
+        public static string GetAddressFromLatLon(PointLatLng paramPosition)
         {
             GeoCoderStatusCode status;
             var address = OpenStreetMapProvider.Instance.GetPlacemark(paramPosition, out status);
@@ -128,6 +140,34 @@ namespace Rendev
             if (e.Button == MouseButtons.Left)
             {
                 UpdateMouseClickMarkerPosition(e.X, e.Y);
+            }
+        }
+        private void _mapControl_OnMarkerClick(GMapMarker clickedMarker, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Event clickedEvent = DataManager.GetInstance().GetEventByPosition(clickedMarker.Position);
+                if (clickedEvent != null)
+                {
+                    frmModifSupr popUp = new frmModifSupr(clickedEvent);
+                    if (popUp.ShowDialog() == DialogResult.OK)
+                    {
+                        if (popUp.RadioButtonDelete())
+                        {
+                            DataManager.GetInstance().RemoveEvent(clickedEvent.Name);
+                        }
+                        else
+                        {
+                            frmAddModif frmModif = new frmAddModif(false);
+                            frmModif.Map.UpdateMouseClickMarkerPosition(clickedEvent.Position);
+                            if (frmModif.ShowDialog() == DialogResult.OK)
+                            {
+                                DataManager.GetInstance().UpdateEvent(clickedEvent.Id, frmModif.GetName(), frmModif.GetDecription(), frmModif.GetDate(), new Position(1, frmModif.GetPosition()), frmModif.GetCategory());
+                            }
+                        }
+                    }
+                    SynchronizeMapEventsWithServer();
+                }
             }
         }
         #endregion

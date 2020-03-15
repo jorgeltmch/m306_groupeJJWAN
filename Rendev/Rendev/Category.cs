@@ -4,6 +4,7 @@
 // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000868 begin
 // section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000868 end
 
+using GMap.NET.WindowsForms.Markers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,37 +18,27 @@ public class Category
 {
     // Attributes
 
-    public string name;
+    private int _id;
+    private string _name;
+    private GMarkerGoogleType _image;
 
-    public Image image;
-
-    public string description;
-
-    // Associations
-
-    /// <summary> 
-    /// </summary>
-    public List<Event>  myEvent;
-
-    // Operations
-
-    /// <summary>
-    ///  An operation that does...
-    /// 
-    ///  @param firstParam a description of this parameter
-    /// </summary>
-    /// <param name="name">
-    /// </param>
-    /// <param name="image">
-    /// </param>
-    /// <param name="description">
-    /// </param>
-    /// <returns>
-    /// </returns>
-    public Category( string name, Image image, string description)
+    // Properties...
+    public GMarkerGoogleType GetMarkerType
     {
-    // section 10-5-45-40-129dc23c:1705313989f:-8000:0000000000000EF0 begin
-    // section 10-5-45-40-129dc23c:1705313989f:-8000:0000000000000EF0 end
+        get
+        {
+            return _image;
+        }
+    }
 
+    public int Id { get => _id; set => _id = value; }
+    public string Name { get => _name; set => _name = value; }
+
+    // Constructors...
+    public Category(int paramId, string paramName, GMarkerGoogleType paramImage)
+    {
+        _id = paramId;
+        _name = paramName;
+        _image = paramImage;
     }
 } /* end class Category */
