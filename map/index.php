@@ -96,9 +96,13 @@ var overlay = new ol.Overlay({
     ]
   });
 
-  layer.idE = idEvent;
 
-  var x = layer.idE;
+// prend 'id
+  layer.idE = idEvent;
+  // var x avec id
+  var idLayer = layer.idE;
+
+
   // ajout layer
   map.addLayer(layer);
 }
@@ -116,26 +120,14 @@ var highlightStyle = new ol.style.Style({
 var selected = null;
 var status = document.getElementById('status');
 
+// ez bro we are with papa biceps and the cyka nugets club of london
 map.on('pointermove', function(e) {
-  if (selected !== null) {
-    selected.setStyle(undefined);
-    selected = null;
+  var feature = map.forEachFeatureAtPixel(e.pixel,
+  function(feature, layer) {
+    feature.id_ = layer.idE;
+    return feature;
   }
-
-  map.forEachFeatureAtPixel(e.pixel, function(f) {
-    selected = f;
-    alert(selected.ol_uid);
-    f.setStyle(highlightStyle);
-    return true;
-  });
-
-  if (selected) {
-    var coordinate = e.coordinate;
-    var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-    status.innerHTML = '<p>test</p>'
-  } else {
-    status.innerHTML = '&nbsp;';
-  }
+);
 });
 
 for (var i = 0; i < events.length; i++){
@@ -148,6 +140,7 @@ for (var i = 0; i < events.length; i++){
 
 
   var x = ol.proj.fromLonLat([ lon , lat]);
+
   AddLayer(x, id);
 
 }
