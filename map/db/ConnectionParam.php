@@ -12,7 +12,7 @@ class ConnectionParam
     const EDB_DBNAME = "rendevDB";
     const EDB_HOST = "localhost";
     const EDB_PORT = "3306";
-    const EDB_USER = "dbManager";
+    const EDB_USER = "jorge";
     const EDB_PASS = "Super";
 }
 
