@@ -73,14 +73,10 @@ var overlay = new ol.Overlay({
       zoom: 12
     })
   });
-
-
-
-  
   
   // Affichage
   
-  function AddLayer(position) {
+  function AddLayer(position, idEvent) {
     var layer = new ol.layer.Vector({
     
     source: new ol.source.Vector({
@@ -99,6 +95,10 @@ var overlay = new ol.Overlay({
       })
     ]
   });
+
+  layer.idE = idEvent;
+
+  var x = layer.idE;
   // ajout layer
   map.addLayer(layer);
 }
@@ -124,6 +124,7 @@ map.on('pointermove', function(e) {
 
   map.forEachFeatureAtPixel(e.pixel, function(f) {
     selected = f;
+    alert(selected.ol_uid);
     f.setStyle(highlightStyle);
     return true;
   });
@@ -142,10 +143,12 @@ for (var i = 0; i < events.length; i++){
   var lat = obj.latitude;
   var lon = obj.longitude;
 
+  var id = obj.idEvenement;
+
 
 
   var x = ol.proj.fromLonLat([ lon , lat]);
-  AddLayer(x);
+  AddLayer(x, id);
 
 }
 

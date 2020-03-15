@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `rendevDB`.`categorie` (
   `nomCategorie` VARCHAR(45) NOT NULL,
   `ImageCategorie` VARCHAR(45) NULL,
   PRIMARY KEY (`idCategorie`),
-  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) VISIBLE,
-  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) VISIBLE)
+  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) ,
+  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) )
 ENGINE = InnoDB;
 
 
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `rendevDB`.`evenement` (
   `categorie_idCategorie` INT NOT NULL,
   `position_idPosition` INT NOT NULL,
   PRIMARY KEY (`idEvenement`, `position_idPosition`),
-  INDEX `fk_evenement_categorie_idx` (`categorie_idCategorie` ASC) VISIBLE,
-  INDEX `fk_evenement_position1_idx` (`position_idPosition` ASC) VISIBLE,
+  INDEX `fk_evenement_categorie_idx` (`categorie_idCategorie` ASC) ,
+  INDEX `fk_evenement_position1_idx` (`position_idPosition` ASC) ,
   CONSTRAINT `fk_evenement_categorie`
     FOREIGN KEY (`categorie_idCategorie`)
     REFERENCES `rendevDB`.`categorie` (`idCategorie`)
@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `rendevdb`.`categorie` (
   `nomCategorie` VARCHAR(45) NOT NULL,
   `ImageCategorie` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idCategorie`),
-  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) VISIBLE,
-  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) VISIBLE)
+  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) ,
+  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS `rendevdb`.`evenement` (
   `idCategorie` INT NOT NULL,
   `idPosition` INT NOT NULL,
   PRIMARY KEY (`idEvenement`, `idPosition`),
-  INDEX `fk_evenement_categorie_idx` (`idCategorie` ASC) VISIBLE,
-  INDEX `fk_evenement_position1_idx` (`idPosition` ASC) VISIBLE,
+  INDEX `fk_evenement_categorie_idx` (`idCategorie` ASC) ,
+  INDEX `fk_evenement_position1_idx` (`idPosition` ASC) ,
   CONSTRAINT `fk_evenement_categorie`
     FOREIGN KEY (`idCategorie`)
     REFERENCES `rendevdb`.`categorie` (`idCategorie`),
