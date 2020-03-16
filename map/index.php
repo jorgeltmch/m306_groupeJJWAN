@@ -1,14 +1,15 @@
 <?php
+/*
+    index.php 
+    Auteur : team Rendev
+    Date : 16.03.20
+*/
 
 require_once 'lib.inc.php';
 
 $idSelected = (empty($_POST['idHidden'])) ? "" : $_POST['idHidden'];
 
-
-//phpinfo();
 $events = getEvents();
-
-$x = 2;
 
 ?>
 
@@ -21,18 +22,21 @@ $x = 2;
     <title>Map</title>
   </head>
   <body>
-<?php 
-if (!empty($idSelected)) {
-  $postAAfficher = getEventByID($idSelected);
-  echo displayEvent($postAAfficher);
-}
-?>
+
+
   <form method="POST" action="#" id="sendId">
       <input type="hidden" id="idHidden" name="idHidden" value="" />
     </form>
 
     <div id="map" class="map"></div>
-    <div id="status">
+    <div id="status" class="card"><?php 
+        if (!empty($idSelected)) {
+          $postAAfficher = getEventByID($idSelected);
+        if (!empty($postAAfficher)) {
+          echo displayEvent($postAAfficher);
+        }
+          
+        }?>
     </div>
 
     <div id="popup" class="ol-popup">
@@ -47,8 +51,13 @@ if (!empty($idSelected)) {
 
 
 var events = <?php echo json_encode($events); ?>;
+<?php if(!empty(getEventByID($idSelected)[0]["latitude"])) : ?>
 var latSelected = <?php echo json_encode(getEventByID($idSelected)[0]["latitude"]); ?>;
 var longSelected = <?php echo json_encode(getEventByID($idSelected)[0]["longitude"]); ?>;
+<?php else : ?>
+var latSelected = 46.17;
+var longSelected = 6.13;
+<?php endif; ?>
 
 var container = document.getElementById('popup');
 /**
@@ -62,12 +71,9 @@ var overlay = new ol.Overlay({
   }
 });
 
-
 /**
- * Add a click handler to hide the popup.
- * @return {boolean} Don't follow the href.
+ * Scope de la map au debut du programme
  */
-
 var map = new ol.Map({
     overlays: [overlay],
     target: 'map',
@@ -75,21 +81,19 @@ var map = new ol.Map({
       new ol.layer.Tile({
         source: new ol.source.OSM()
       })
-    ],
-    
+    ],   
     //Vue spawn
-
     view: new ol.View({
       center: ol.proj.fromLonLat([longSelected, latSelected]), 
       zoom: 12
     })
   });
   
-  // Affichage
-  
+  /**
+  * Ajoute un point et lui affecte l'id de l'event
+  */
   function AddLayer(position, idEvent) {
-    var layer = new ol.layer.Vector({
-    
+    var layer = new ol.layer.Vector({   
     source: new ol.source.Vector({
       projection: 'EPSG:4326',
       features: [new ol.Feature(new ol.geom.Circle(position, 1000))]
@@ -106,18 +110,14 @@ var map = new ol.Map({
       })
     ]
   });
-
-
-// prend 'id
-  layer.idE = idEvent;
-  // var x avec id
-  var idLayer = layer.idE;
-
-
+  layer.idE = idEvent; // prend l'id
   // ajout layer
   map.addLayer(layer);
 }
 
+/**
+  * Style des points
+  */
 var highlightStyle = new ol.style.Style({
   fill: new ol.style.Fill({
     color: 'rgba(255,255,255,0.7)'
@@ -128,40 +128,30 @@ var highlightStyle = new ol.style.Style({
   })
 });
 
-var selected = null;
-var status = document.getElementById('status');
-
-
+/**
+  * Lors du click sur un event : un formulaire post avec l'id de l'event selectionné est envoyé
+  */
 map.on('click', function(e) {
   var feature = map.forEachFeatureAtPixel(e.pixel,
   function(feature, layer) {
     feature.id_ = layer.idE;
     document.getElementById("idHidden").value = feature.id_;
     document.getElementById("sendId").submit();
-
     return feature;
   }
 );
 });
 
+//Pour chaque evenement : envoie son id et son evenement à AddLayer
 for (var i = 0; i < events.length; i++){
   var obj = events[i];
   var lat = obj.latitude;
   var lon = obj.longitude;
-
   var id = obj.idEvenement;
-
-
-
   var x = ol.proj.fromLonLat([ lon , lat]);
-
   AddLayer(x, id);
 
 }
-
-
-
-
     </script>
   </body>
 </html>
