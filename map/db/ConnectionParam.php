@@ -9,11 +9,11 @@
 class ConnectionParam
 {
     const EDB_DBTYPE = "mysql";
-    const EDB_DBNAME = "rendev";
-    const EDB_HOST = "hibou.lab.ecinf.ch";
-    const EDB_PORT = "3307";
-    const EDB_USER = "rendev";
-    const EDB_PASS = "Super2020?";
+    const EDB_DBNAME = "rendevDB";
+    const EDB_HOST = "localhost";
+    const EDB_PORT = "3306";
+    const EDB_USER = "jorge";
+    const EDB_PASS = "Super";
 }
 
 

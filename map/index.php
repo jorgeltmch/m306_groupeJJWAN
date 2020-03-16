@@ -2,10 +2,13 @@
 
 require_once 'lib.inc.php';
 
+$idSelected = (empty($_POST['idHidden'])) ? "" : $_POST['idHidden'];
+
+
 //phpinfo();
 $events = getEvents();
 
-var_dump($events);
+$x = 2;
 
 ?>
 
@@ -18,9 +21,22 @@ var_dump($events);
     <title>Map</title>
   </head>
   <body>
+<?php 
+if (!empty($idSelected)) {
+  $postAAfficher = getEventByID($idSelected);
+  echo displayEvent($postAAfficher);
+}
+?>
+  <form method="POST" action="#" id="sendId">
+      <input type="hidden" id="idHidden" name="idHidden" value="" />
+    </form>
+
+
     <div id="map" class="map"></div>
     <div id="status">
     </div>
+
+    
 	<div id="popup" class="ol-popup">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
       <div id="popup-content"></div>
@@ -33,6 +49,8 @@ var_dump($events);
 
 
 var events = <?php echo json_encode($events); ?>;
+var latSelected = <?php echo json_encode(getEventByID($idSelected)[0]["latitude"]); ?>;
+var longSelected = <?php echo json_encode(getEventByID($idSelected)[0]["longitude"]); ?>;
 
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
@@ -68,19 +86,16 @@ var overlay = new ol.Overlay({
     ],
     
     //Vue spawn
+
     view: new ol.View({
-      center: ol.proj.fromLonLat([6.1667, 46.2]), 
+      center: ol.proj.fromLonLat([longSelected, latSelected]), 
       zoom: 12
     })
   });
-
-
-
-  
   
   // Affichage
   
-  function AddLayer(position) {
+  function AddLayer(position, idEvent) {
     var layer = new ol.layer.Vector({
     
     source: new ol.source.Vector({
@@ -99,6 +114,14 @@ var overlay = new ol.Overlay({
       })
     ]
   });
+
+
+// prend 'id
+  layer.idE = idEvent;
+  // var x avec id
+  var idLayer = layer.idE;
+
+
   // ajout layer
   map.addLayer(layer);
 }
@@ -116,25 +139,17 @@ var highlightStyle = new ol.style.Style({
 var selected = null;
 var status = document.getElementById('status');
 
-map.on('pointermove', function(e) {
-  if (selected !== null) {
-    selected.setStyle(undefined);
-    selected = null;
-  }
 
-  map.forEachFeatureAtPixel(e.pixel, function(f) {
-    selected = f;
-    f.setStyle(highlightStyle);
-    return true;
-  });
+map.on('click', function(e) {
+  var feature = map.forEachFeatureAtPixel(e.pixel,
+  function(feature, layer) {
+    feature.id_ = layer.idE;
+    document.getElementById("idHidden").value = feature.id_;
+    document.getElementById("sendId").submit();
 
-  if (selected) {
-    var coordinate = e.coordinate;
-    var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-    status.innerHTML = '<p>test</p>'
-  } else {
-    status.innerHTML = '&nbsp;';
+    return feature;
   }
+);
 });
 
 for (var i = 0; i < events.length; i++){
@@ -142,16 +157,17 @@ for (var i = 0; i < events.length; i++){
   var lat = obj.latitude;
   var lon = obj.longitude;
 
+  var id = obj.idEvenement;
+
 
 
   var x = ol.proj.fromLonLat([ lon , lat]);
-  AddLayer(x);
+
+  AddLayer(x, id);
 
 }
 
-	// Ajout des positions via la fonction 
-  //AddLayer(centerLongitudeLatitude);
-  //AddLayer(centerLongitudeLatitude2);
+
 
 
     </script>

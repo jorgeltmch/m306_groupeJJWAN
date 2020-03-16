@@ -23,9 +23,7 @@ body {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.container {
-  padding: 2px 16px;
-}
+
 
 .ol-popup {
   position: absolute;
@@ -67,4 +65,23 @@ body {
 }
 .ol-popup-closer:after {
   content: "X";
+}
+
+#rightbox{ 
+  float:right; 
+  width:25%; 
+  height:280px; 
+} 
+.overlay {     
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;      
+  background-color: rgba(255, 50, 50, 0.5);     
+}
+
+.containerDiv {
+  position: relative;
+  width: 500px;
 }
