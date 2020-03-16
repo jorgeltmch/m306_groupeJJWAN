@@ -1,9 +1,16 @@
 <?php
+/*
+    Librairie php 
+    Auteur : team Rendev
+    Date : 16.03.20
+*/
 
 require_once './db/EDatabase.php';
 
 
-
+/**
+  * Récupère tous les évennements (id, nom, description, date et lat long)
+  */
 function getEvents(){
     static $req;
 
@@ -25,7 +32,9 @@ function getEvents(){
 }
 
 
-
+/**
+  * Récupère un évennement avec l'id (toutes ses infos)
+  */
 function getEventByID($id){
 
     $sql = 
@@ -51,6 +60,10 @@ function getEventByID($id){
     return $result;
 }
 
+
+/**
+  * Affiche l'event selectionné
+  */
 function displayEvent($eventAAfficher){
     $eventAAfficher = $eventAAfficher[0];
 
