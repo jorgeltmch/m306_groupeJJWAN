@@ -20,7 +20,6 @@ public class Event : GMarkerGoogle
     private Category _category;
     private string _description;
     private DateTime _date;
-    private string _adress;
     private Position _eventPosition;
     // Properties...
     public DateTime Date { get => _date; set => _date = value; }
@@ -31,11 +30,15 @@ public class Event : GMarkerGoogle
         set
         {
             _eventPosition = value;
-            Adress = Map.GetAddressFromLatLon(_eventPosition.PointLatLng);
         }
     }
     public int Id { get => _id; set => _id = value; }
-    public string Adress { get => _adress; set => _adress = value; }
+    public string Adress {
+        get
+        {
+            return Map.GetAddressFromLatLon(EventPosition.PointLatLng);
+        }
+    }
     public string Name { get => _name; set => _name = value; }
 
     // Constructor...

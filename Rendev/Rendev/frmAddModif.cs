@@ -24,10 +24,21 @@ namespace Rendev
         private bool _isAdding;
         internal Map Map { get => _map; set => _map = value; }
 
-        public frmAddModif(bool paramIsAdding)
+        public frmAddModif(Event paramEventModifying = null)
         {
             InitializeComponent();
-            _isAdding = paramIsAdding;
+            if (paramEventModifying == null)
+            {
+                _isAdding = true;
+            }
+            else
+            {
+                _isAdding = false;
+                tbxNomEvent.Text = paramEventModifying.Name;
+                tbxDescriptionEvent.Text = paramEventModifying.Description;
+                dtpDateEvent.Value = paramEventModifying.Date;
+                cmbCategoriEvent.SelectedValue = paramEventModifying.Category.Id;
+            }
             Map = new Map(ModifMap);
             Map.MapControl.MouseClick += MapControl_MouseClick;
         }
@@ -47,7 +58,7 @@ namespace Rendev
                 if (_isAdding)
                 {
                     int id = Convert.ToInt32(DataManager.GetInstance().AddDataPosition(Map.MouseClickMarker.Position.Lat, Map.MouseClickMarker.Position.Lng));
-                    DataManager.GetInstance().AddDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value, id, (int)cmbCategoriEvent.SelectedValue);
+                    DataManager.GetInstance().AddDataEvent(tbxNomEvent.Text, tbxDescriptionEvent.Text, dtpDateEvent.Value, id, (int) cmbCategoriEvent.SelectedValue);
                 }
             }
             else
@@ -80,12 +91,16 @@ namespace Rendev
         private void UpdateCategorie()
         {
             List<Category> values = DataManager.GetInstance().Categories;
-
             if (values != null)
             {
-                cmbCategoriEvent.DataSource = new BindingSource(values, null);
+                BindingList<Category> source = new BindingList<Category>(values);
+                cmbCategoriEvent.DataSource = source;
                 cmbCategoriEvent.DisplayMember = "Name";
                 cmbCategoriEvent.ValueMember = "Id";
+                Category other = new Category(999, "Other", Constants.EVENT_MARKER_TYPE);
+                source.Add(other);
+                source = new BindingList<Category>(source.GroupBy(c => c.Name).Select(g => g.First()).ToList());
+                cmbCategoriEvent.DataSource = source;
             }
         }
 
@@ -106,7 +121,7 @@ namespace Rendev
 
         public Category GetCategory()
         {
-            return DataManager.GetInstance().GetCategoryByIdIfExist((int)cmbCategoriEvent.SelectedValue);
+            return DataManager.GetInstance().GetCategoryByIdIfExist((int) cmbCategoriEvent.SelectedValue);
         }
 
         public DateTime GetDate()
@@ -125,7 +140,7 @@ namespace Rendev
                 if (cmbCategoriEvent.GetItemText(cmbCategoriEvent.SelectedItem) == "Other")
                 {
                     frmCategory frmCategory = new frmCategory();
-                    
+
                     // Ouvre la forme pour ajouter une catégorie
                     if (frmCategory.ShowDialog() == DialogResult.OK)
                     {

@@ -41,7 +41,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(128, 195);
+            this.btnOk.Location = new System.Drawing.Point(270, 195);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(76, 30);
             this.btnOk.TabIndex = 0;
@@ -62,7 +62,7 @@
             // 
             this.rdbModif.AutoSize = true;
             this.rdbModif.Checked = true;
-            this.rdbModif.Location = new System.Drawing.Point(24, 117);
+            this.rdbModif.Location = new System.Drawing.Point(22, 117);
             this.rdbModif.Name = "rdbModif";
             this.rdbModif.Size = new System.Drawing.Size(62, 17);
             this.rdbModif.TabIndex = 2;
@@ -73,7 +73,7 @@
             // rdbSuppr
             // 
             this.rdbSuppr.AutoSize = true;
-            this.rdbSuppr.Location = new System.Drawing.Point(24, 152);
+            this.rdbSuppr.Location = new System.Drawing.Point(22, 152);
             this.rdbSuppr.Name = "rdbSuppr";
             this.rdbSuppr.Size = new System.Drawing.Size(72, 17);
             this.rdbSuppr.TabIndex = 3;
@@ -83,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Location = new System.Drawing.Point(19, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 4;
@@ -92,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 59);
+            this.label2.Location = new System.Drawing.Point(19, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 5;
@@ -100,25 +100,25 @@
             // 
             // tbxLieu
             // 
-            this.tbxLieu.Location = new System.Drawing.Point(24, 25);
+            this.tbxLieu.Location = new System.Drawing.Point(22, 25);
             this.tbxLieu.Name = "tbxLieu";
             this.tbxLieu.ReadOnly = true;
-            this.tbxLieu.Size = new System.Drawing.Size(180, 20);
+            this.tbxLieu.Size = new System.Drawing.Size(324, 20);
             this.tbxLieu.TabIndex = 6;
             // 
             // tbxAdresse
             // 
-            this.tbxAdresse.Location = new System.Drawing.Point(24, 75);
+            this.tbxAdresse.Location = new System.Drawing.Point(22, 75);
             this.tbxAdresse.Name = "tbxAdresse";
             this.tbxAdresse.ReadOnly = true;
-            this.tbxAdresse.Size = new System.Drawing.Size(180, 20);
+            this.tbxAdresse.Size = new System.Drawing.Size(324, 20);
             this.tbxAdresse.TabIndex = 7;
             // 
             // frmModifSupr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(216, 237);
+            this.ClientSize = new System.Drawing.Size(358, 237);
             this.Controls.Add(this.tbxAdresse);
             this.Controls.Add(this.tbxLieu);
             this.Controls.Add(this.label2);

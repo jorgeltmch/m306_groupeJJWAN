@@ -20,7 +20,6 @@ namespace Rendev
             {
                 _categories.AddRange(ConnectionBD.getInstance().GetAllCategories());
                 _categories = _categories.GroupBy(c => c.Id).Select(g => g.First()).ToList();
-               // _categories = _categories.Distinct().ToList();
                 return _categories;
             }
             set => _categories = value;

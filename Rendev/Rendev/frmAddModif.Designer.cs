@@ -142,6 +142,7 @@
             // ModifMap
             // 
             this.ModifMap.Bearing = 0F;
+            this.ModifMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ModifMap.CanDragMap = true;
             this.ModifMap.EmptyTileColor = System.Drawing.Color.Navy;
             this.ModifMap.GrayScaleMode = false;
@@ -169,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 395);
+            this.ClientSize = new System.Drawing.Size(755, 388);
             this.Controls.Add(this.ModifMap);
             this.Controls.Add(this.btnConfirmEvent);
             this.Controls.Add(this.tbx);
@@ -183,6 +184,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddModif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAddModif";

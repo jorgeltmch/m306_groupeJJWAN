@@ -42,7 +42,7 @@ namespace Rendev
             this.AddMap.GrayScaleMode = false;
             this.AddMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.AddMap.LevelsKeepInMemmory = 5;
-            this.AddMap.Location = new System.Drawing.Point(12, 12);
+            this.AddMap.Location = new System.Drawing.Point(-2, 2);
             this.AddMap.MarkersEnabled = true;
             this.AddMap.MaxZoom = 18;
             this.AddMap.MinZoom = 2;
@@ -56,15 +56,16 @@ namespace Rendev
             this.AddMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.AddMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.AddMap.ShowTileGridLines = false;
-            this.AddMap.Size = new System.Drawing.Size(722, 380);
+            this.AddMap.Size = new System.Drawing.Size(746, 403);
             this.AddMap.TabIndex = 2;
             this.AddMap.Zoom = 0D;
+            this.AddMap.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AddMap_MouseDoubleClick);
             // 
             // btnAddEvent
             // 
-            this.btnAddEvent.Location = new System.Drawing.Point(602, 398);
+            this.btnAddEvent.Location = new System.Drawing.Point(644, 369);
             this.btnAddEvent.Name = "btnAddEvent";
-            this.btnAddEvent.Size = new System.Drawing.Size(132, 31);
+            this.btnAddEvent.Size = new System.Drawing.Size(100, 36);
             this.btnAddEvent.TabIndex = 1;
             this.btnAddEvent.Text = "Ajout Event";
             this.btnAddEvent.UseVisualStyleBackColor = true;
@@ -74,9 +75,9 @@ namespace Rendev
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 441);
-            this.Controls.Add(this.AddMap);
+            this.ClientSize = new System.Drawing.Size(742, 402);
             this.Controls.Add(this.btnAddEvent);
+            this.Controls.Add(this.AddMap);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "frmPrincipal";

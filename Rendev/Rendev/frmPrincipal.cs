@@ -21,7 +21,7 @@ namespace Rendev
 
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
-            frmAddModif frmAdd = new frmAddModif(true);
+            frmAddModif frmAdd = new frmAddModif();
             if (_map.MouseClickMarker != null)
             {
                 frmAdd.Map.UpdateMouseClickMarkerPosition(_map.MouseClickMarker.Position);
@@ -30,6 +30,12 @@ namespace Rendev
                     _map.SynchronizeMapEventsWithServer();
                 }
             }
+        }
+
+        private void AddMap_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            _map.MapControl_MouseClick(sender, e);
+            btnAddEvent.PerformClick();
         }
     }
 }

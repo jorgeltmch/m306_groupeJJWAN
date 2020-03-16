@@ -135,7 +135,7 @@ namespace Rendev
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MapControl_MouseClick(object sender, MouseEventArgs e)
+        public void MapControl_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -158,7 +158,7 @@ namespace Rendev
                         }
                         else
                         {
-                            frmAddModif frmModif = new frmAddModif(false);
+                            frmAddModif frmModif = new frmAddModif(clickedEvent);
                             frmModif.Map.UpdateMouseClickMarkerPosition(clickedEvent.Position);
                             if (frmModif.ShowDialog() == DialogResult.OK)
                             {
