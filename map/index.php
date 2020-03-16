@@ -21,18 +21,18 @@ $x = 2;
     <title>Map</title>
   </head>
   <body>
-<?php 
-if (!empty($idSelected)) {
-  $postAAfficher = getEventByID($idSelected);
-  echo displayEvent($postAAfficher);
-}
-?>
+
+
   <form method="POST" action="#" id="sendId">
       <input type="hidden" id="idHidden" name="idHidden" value="" />
     </form>
 
     <div id="map" class="map"></div>
-    <div id="status">
+    <div id="status" class="card"><?php 
+        if (!empty($idSelected)) {
+          $postAAfficher = getEventByID($idSelected);
+          echo displayEvent($postAAfficher);
+        }?>
     </div>
 
     <div id="popup" class="ol-popup">
@@ -136,8 +136,12 @@ map.on('click', function(e) {
   var feature = map.forEachFeatureAtPixel(e.pixel,
   function(feature, layer) {
     feature.id_ = layer.idE;
+
+
     document.getElementById("idHidden").value = feature.id_;
     document.getElementById("sendId").submit();
+
+
 
     return feature;
   }

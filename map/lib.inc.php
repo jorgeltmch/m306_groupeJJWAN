@@ -54,13 +54,13 @@ function getEventByID($id){
 function displayEvent($eventAAfficher){
     $eventAAfficher = $eventAAfficher[0];
 
-    $html = "<div id = \"rightbox\"> 
-    <h2>". $eventAAfficher["nomEvenement"] . "</h2> 
+    $html = 
+    "<h2>". $eventAAfficher["nomEvenement"] . "</h2> 
     <h3>". $eventAAfficher["descriptionEvenement"] . "</h3> 
     <h4> Categorie :". $eventAAfficher["nomCategorie"] . "</h4> 
     <h4> Date :". $eventAAfficher["dateEvent"] . "</h4> 
     <h4> Position Exacte :". $eventAAfficher["latitude"] . " " . $eventAAfficher["longitude"] . "</h4> 
-    </div> ";
+     ";
 
     return $html;
 }
