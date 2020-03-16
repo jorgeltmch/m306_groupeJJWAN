@@ -61,9 +61,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Nom Category :";
+            this.label1.Text = "Nom de la categorie :";
             // 
             // tbxCategory
             // 
@@ -86,7 +86,7 @@
             this.MaximizeBox = false;
             this.Name = "frmCategory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Category";
+            this.Text = "Ajouter une categorie";
             this.ResumeLayout(false);
             this.PerformLayout();
 

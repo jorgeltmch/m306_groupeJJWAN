@@ -42,7 +42,6 @@ public class Event : GMarkerGoogle
     public string Name { get => _name; set => _name = value; }
 
     // Constructor...
-
     public Event(int paramId, string paramName, Category paramCategory, string paramDescription, DateTime paramDate, Position paramPosition) :base(paramPosition.PointLatLng, paramCategory.GetMarkerType)
     {
         _id = paramId;

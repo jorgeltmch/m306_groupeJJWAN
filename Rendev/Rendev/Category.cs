@@ -1,19 +1,5 @@
-// FILE: C:/m306_groupeJJWAN//Category.cs
-
-// In this section you can add your own using directives
-// section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000868 begin
-// section 10-5-45-40--5b51da51:1700b5340f9:-8000:0000000000000868 end
-
 using GMap.NET.WindowsForms.Markers;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-/// <summary>
-///  A class that represents ...
-/// 
-///  @see OtherClasses
-///  @author your_name_here
-/// </summary>
+
 public class Category
 {
     // Attributes

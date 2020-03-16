@@ -1,10 +1,5 @@
-﻿using GMap.NET.WindowsForms;
-using System;
+﻿using System;
 using System.Windows.Forms;
-using GMap.NET;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.MapProviders;
-using System.Collections.Generic;
 
 namespace Rendev
 {

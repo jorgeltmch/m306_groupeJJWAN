@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="ConnectionBD.cs" />
+    <Compile Include="ConnectionDB.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Event.cs" />

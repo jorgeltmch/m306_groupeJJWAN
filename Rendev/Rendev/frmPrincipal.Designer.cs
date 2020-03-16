@@ -63,11 +63,11 @@ namespace Rendev
             // 
             // btnAddEvent
             // 
-            this.btnAddEvent.Location = new System.Drawing.Point(644, 369);
+            this.btnAddEvent.Location = new System.Drawing.Point(618, 369);
             this.btnAddEvent.Name = "btnAddEvent";
-            this.btnAddEvent.Size = new System.Drawing.Size(100, 36);
+            this.btnAddEvent.Size = new System.Drawing.Size(126, 36);
             this.btnAddEvent.TabIndex = 1;
-            this.btnAddEvent.Text = "Ajout Event";
+            this.btnAddEvent.Text = "Ajouter un événement";
             this.btnAddEvent.UseVisualStyleBackColor = true;
             this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 

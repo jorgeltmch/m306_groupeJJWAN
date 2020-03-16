@@ -7,31 +7,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GMap.NET;
 using MySql.Data.MySqlClient;
 
 namespace Rendev
 {
-    class ConnectionBD
+    class ConnectionDB
     {
-        private static ConnectionBD _instance;
+        private static ConnectionDB _instance;
 
         // connection à la basse de donnée
         //private string _sDatabase = "server=hibou.lab.ecinf.ch;database=rendev;port=3307;userid=rendev;password=Super2020?";
 
         // Constructeur de la base de la calsse
-        private ConnectionBD()
+        private ConnectionDB()
         {
         }
 
-        public static ConnectionBD getInstance()
+        public static ConnectionDB getInstance()
         {
             if (_instance == null)
-                _instance = new ConnectionBD();
+                _instance = new ConnectionDB();
 
             return _instance;
         }

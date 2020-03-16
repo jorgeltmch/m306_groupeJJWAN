@@ -41,9 +41,9 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(270, 195);
+            this.btnOk.Location = new System.Drawing.Point(289, 195);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(76, 30);
+            this.btnOk.Size = new System.Drawing.Size(85, 30);
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             this.tbxLieu.Location = new System.Drawing.Point(22, 25);
             this.tbxLieu.Name = "tbxLieu";
             this.tbxLieu.ReadOnly = true;
-            this.tbxLieu.Size = new System.Drawing.Size(324, 20);
+            this.tbxLieu.Size = new System.Drawing.Size(352, 20);
             this.tbxLieu.TabIndex = 6;
             // 
             // tbxAdresse
@@ -111,14 +111,14 @@
             this.tbxAdresse.Location = new System.Drawing.Point(22, 75);
             this.tbxAdresse.Name = "tbxAdresse";
             this.tbxAdresse.ReadOnly = true;
-            this.tbxAdresse.Size = new System.Drawing.Size(324, 20);
+            this.tbxAdresse.Size = new System.Drawing.Size(352, 20);
             this.tbxAdresse.TabIndex = 7;
             // 
             // frmModifSupr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 237);
+            this.ClientSize = new System.Drawing.Size(386, 237);
             this.Controls.Add(this.tbxAdresse);
             this.Controls.Add(this.tbxLieu);
             this.Controls.Add(this.label2);
@@ -131,7 +131,7 @@
             this.MaximizeBox = false;
             this.Name = "frmModifSupr";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmModifSupr";
+            this.Text = "Voulez-vous modifier ou supprimer l\'événement";
             this.ResumeLayout(false);
             this.PerformLayout();
 

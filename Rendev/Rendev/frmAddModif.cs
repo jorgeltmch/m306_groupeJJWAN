@@ -10,10 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Rendev
@@ -97,7 +94,7 @@ namespace Rendev
                 cmbCategoriEvent.DataSource = source;
                 cmbCategoriEvent.DisplayMember = "Name";
                 cmbCategoriEvent.ValueMember = "Id";
-                Category other = new Category(999, "Other", Constants.EVENT_MARKER_TYPE);
+                Category other = new Category(999, "Autre", Constants.EVENT_MARKER_TYPE);
                 source.Add(other);
                 source = new BindingList<Category>(source.GroupBy(c => c.Name).Select(g => g.First()).ToList());
                 cmbCategoriEvent.DataSource = source;
@@ -137,7 +134,7 @@ namespace Rendev
             if (cmbCategoriEvent.SelectedItem != null)
             {
                 // Verifie si dans le comboBox on selectionne Other
-                if (cmbCategoriEvent.GetItemText(cmbCategoriEvent.SelectedItem) == "Other")
+                if (cmbCategoriEvent.GetItemText(cmbCategoriEvent.SelectedItem) == "Autre")
                 {
                     frmCategory frmCategory = new frmCategory();
 

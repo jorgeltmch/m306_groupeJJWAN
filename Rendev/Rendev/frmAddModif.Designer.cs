@@ -56,9 +56,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(602, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Nom Event :";
+            this.label2.Text = "Nom de l\'événement :";
             // 
             // label3
             // 
@@ -135,7 +135,7 @@
             this.btnConfirmEvent.Name = "btnConfirmEvent";
             this.btnConfirmEvent.Size = new System.Drawing.Size(147, 37);
             this.btnConfirmEvent.TabIndex = 11;
-            this.btnConfirmEvent.Text = "Confirm Event";
+            this.btnConfirmEvent.Text = "Confirmer";
             this.btnConfirmEvent.UseVisualStyleBackColor = true;
             this.btnConfirmEvent.Click += new System.EventHandler(this.btnConfirmEvent_Click);
             // 
@@ -188,7 +188,7 @@
             this.MinimizeBox = false;
             this.Name = "frmAddModif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmAddModif";
+            this.Text = "Ajouter ou modifier un événement ";
             this.Load += new System.EventHandler(this.frmAddModif_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

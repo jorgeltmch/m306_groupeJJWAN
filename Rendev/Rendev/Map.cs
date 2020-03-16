@@ -25,18 +25,18 @@ namespace Rendev
         /// <summary>
         /// Overlay that contains all the marker that will be displayed on the map
         /// </summary>
-        public GMapOverlay Markers { get => _markers;}
+        public GMapOverlay Markers { get => _markers; }
 
         /// <summary>
         /// The marker that shows up when the user click on the map
         /// Is unique
         /// </summary>
-        public GMapMarker MouseClickMarker { get => _mouseClickMarker;}
+        public GMapMarker MouseClickMarker { get => _mouseClickMarker; }
 
         /// <summary>
         /// Link to the form control to update;
         /// </summary>
-        public GMapControl MapControl { get => _mapControl;}
+        public GMapControl MapControl { get => _mapControl; }
         /// <summary>
         /// All markers of already existing events
         /// </summary>
@@ -66,12 +66,10 @@ namespace Rendev
             _mapControl.ShowCenter = Constants.IS_SHOWING_CENTER;
             _mapControl.MouseWheelZoomType = Constants.ZOOM_TYPE;
             _mapControl.MapProvider.RefererUrl = Constants.REFERER_URL;
-            //GMapProvider.UserAgent = Constants.USER_AGENT;
-            //GMaps.Instance.Mode = Constants.ACCESS_MODE;
             _mapControl.SetPositionByKeywords(Constants.STARTING_POSITION);
             _mapControl.Zoom = Constants.STARTING_ZOOM;
 
-           _mapControl.MouseClick += MapControl_MouseClick;
+            _mapControl.MouseClick += MapControl_MouseClick;
             _mapControl.OnMarkerClick += _mapControl_OnMarkerClick;
         }
 
@@ -90,19 +88,15 @@ namespace Rendev
         {
             UpdateMouseClickMarkerPosition(MapControl.FromLocalToLatLng(paramPositionX, paramPositionY));
         }
+        /// <summary>
+        /// Ajoute le marqueur à la position spécifié en paramètre
+        /// </summary>
+        /// <param name="paramPosition"></param>
         public void AddMarkerAtLocation(PointLatLng paramPosition)
         {
             GMarkerGoogle _newMarker = new GMarkerGoogle(paramPosition, Constants.EVENT_MARKER_TYPE);
             _events.Add(_newMarker);
             _markers.Markers.Add(_newMarker);
-        }
-        /// <summary>
-        /// Get the LatLong position of the mouseMarker
-        /// </summary>
-        /// <returns>PointLatLng --> need the using GMap.NET </returns>
-        public PointLatLng GetMarkerLatLon()
-        {
-            return MouseClickMarker.Position;
         }
         public void SetEventsMarker(List<PointLatLng> paramEventsPositions)
         {
@@ -142,6 +136,11 @@ namespace Rendev
                 UpdateMouseClickMarkerPosition(e.X, e.Y);
             }
         }
+        /// <summary>
+        /// Si le marqueur est cliqué avec le bouton droit, ouvrir la pop up 
+        /// </summary>
+        /// <param name="clickedMarker"></param>
+        /// <param name="e"></param>
         private void _mapControl_OnMarkerClick(GMapMarker clickedMarker, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
