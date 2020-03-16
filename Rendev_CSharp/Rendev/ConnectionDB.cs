@@ -32,66 +32,6 @@ namespace Rendev
             return _instance;
         }
 
-        // Fonction non utiliser à voire avec nelson si on supprime ou si on garde en cas de besoin
-        /*#region Avoir le nombre de id de chaque table
-        public int CountIdEvent()
-        {
-            string myConnection = Constants.CONNECTION_STRING;
-
-            string sql = "Select COUNT(idEvenement) From evenement";
-
-            MySqlConnection myConn = new MySqlConnection(myConnection);
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
-
-            myConn.Open();
-
-            myReader = myCommand.ExecuteReader();
-
-            myReader.Read();
-
-            return Convert.ToInt32(myReader[0].ToString());
-        }
-
-        public int CountIdPosition()
-        {
-            string myConnection = Constants.CONNECTION_STRING;
-
-            string sql = "Select COUNT(idPosition) From position";
-
-            MySqlConnection myConn = new MySqlConnection(myConnection);
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
-
-            myConn.Open();
-
-            myReader = myCommand.ExecuteReader();
-
-            myReader.Read();
-
-            return Convert.ToInt32(myReader[0].ToString());
-        }
-
-        public int CountIdCategorie()
-        {
-            string myConnection = Constants.CONNECTION_STRING;
-
-            string sql = "Select COUNT(idCategorie) From categorie";
-
-            MySqlConnection myConn = new MySqlConnection(myConnection);
-            MySqlCommand myCommand = new MySqlCommand(sql, myConn);
-            MySqlDataReader myReader;
-
-            myConn.Open();
-
-            myReader = myCommand.ExecuteReader();
-
-            myReader.Read();
-
-            return Convert.ToInt32(myReader[0].ToString());
-        }
-        #endregion*/
-
         #region Méthodes Select
 
         /// <summary>
