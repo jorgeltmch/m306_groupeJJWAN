@@ -127,7 +127,10 @@
             this.Controls.Add(this.rdbModif);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "frmModifSupr";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmModifSupr";
             this.ResumeLayout(false);
             this.PerformLayout();

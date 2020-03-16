@@ -72,7 +72,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(602, 154);
+            this.label4.Location = new System.Drawing.Point(602, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 4;
@@ -112,10 +112,14 @@
             // cmbCategoriEvent
             // 
             this.cmbCategoriEvent.FormattingEnabled = true;
-            this.cmbCategoriEvent.Location = new System.Drawing.Point(605, 170);
+            this.cmbCategoriEvent.Items.AddRange(new object[] {
+            "Other"});
+            this.cmbCategoriEvent.Location = new System.Drawing.Point(605, 176);
             this.cmbCategoriEvent.Name = "cmbCategoriEvent";
             this.cmbCategoriEvent.Size = new System.Drawing.Size(147, 21);
             this.cmbCategoriEvent.TabIndex = 9;
+            this.cmbCategoriEvent.Text = "Choisissez une categorie";
+            this.cmbCategoriEvent.SelectedIndexChanged += new System.EventHandler(this.cmbCategoriEvent_SelectedIndexChanged);
             // 
             // tbx
             // 
@@ -178,6 +182,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmAddModif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAddModif";

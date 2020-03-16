@@ -13,6 +13,7 @@ namespace Rendev
     public partial class frmModifSupr : Form
     {
         Event _selectedEvent;
+
         public frmModifSupr(Event paramEvent)
         {
             InitializeComponent();
@@ -23,6 +24,8 @@ namespace Rendev
                 tbxLieu.Text = _selectedEvent.Name;
             }
         }
+
+
         public bool RadioButtonDelete()
         {
             return rdbSuppr.Checked;

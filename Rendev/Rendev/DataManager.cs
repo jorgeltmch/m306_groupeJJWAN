@@ -105,6 +105,12 @@ namespace Rendev
             Events.Add(new Event(id, nameEvent, GetCategoryByIdIfExist(idCategorie), descriptionEvent, date, GetPositionByIdIfExist(idPosition)));
             return id;
         }
-
+        public long AddDataCategory(string nameCategory)
+        {
+            ConnectionBD myConnec = ConnectionBD.getInstance();
+            int id = Convert.ToInt32(myConnec.InsertDataCategorie(nameCategory));
+            Categories.Add(new Category(id, nameCategory, Constants.EVENT_MARKER_TYPE));
+            return id;
+        }
     }
 }

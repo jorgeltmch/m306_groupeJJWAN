@@ -36,15 +36,19 @@
             // 
             // btnOk
             // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Enabled = false;
             this.btnOk.Location = new System.Drawing.Point(121, 74);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 28);
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnAnnuler
             // 
+            this.btnAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAnnuler.Location = new System.Drawing.Point(8, 74);
             this.btnAnnuler.Name = "btnAnnuler";
             this.btnAnnuler.Size = new System.Drawing.Size(75, 28);
@@ -67,6 +71,7 @@
             this.tbxCategory.Name = "tbxCategory";
             this.tbxCategory.Size = new System.Drawing.Size(188, 20);
             this.tbxCategory.TabIndex = 3;
+            this.tbxCategory.TextChanged += new System.EventHandler(this.tbxCategory_TextChanged);
             // 
             // frmCategory
             // 
@@ -77,7 +82,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "frmCategory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Category";
             this.ResumeLayout(false);
             this.PerformLayout();

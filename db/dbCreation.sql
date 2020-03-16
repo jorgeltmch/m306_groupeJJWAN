@@ -7,36 +7,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema rendevDB
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema rendevDB
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `rendevDB` DEFAULT CHARACTER SET utf8 ;
 USE `rendevDB` ;
-
--- -----------------------------------------------------
--- Table `rendevDB`.`categorie`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rendevDB`.`categorie` (
-  `idCategorie` INT NOT NULL AUTO_INCREMENT,
-  `nomCategorie` VARCHAR(45) NOT NULL,
-  `ImageCategorie` VARCHAR(45) NULL,
-  PRIMARY KEY (`idCategorie`),
-  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) VISIBLE,
-  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `rendevDB`.`position`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rendevDB`.`position` (
-  `idPosition` INT NOT NULL AUTO_INCREMENT,
-  `latitude` DOUBLE NULL,
-  `longitude` DOUBLE NULL,
-  PRIMARY KEY (`idPosition`))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `rendevDB`.`evenement`
@@ -49,8 +21,8 @@ CREATE TABLE IF NOT EXISTS `rendevDB`.`evenement` (
   `categorie_idCategorie` INT NOT NULL,
   `position_idPosition` INT NOT NULL,
   PRIMARY KEY (`idEvenement`, `position_idPosition`),
-  INDEX `fk_evenement_categorie_idx` (`categorie_idCategorie` ASC) VISIBLE,
-  INDEX `fk_evenement_position1_idx` (`position_idPosition` ASC) VISIBLE,
+  INDEX `fk_evenement_categorie_idx` (`categorie_idCategorie` ASC) ,
+  INDEX `fk_evenement_position1_idx` (`position_idPosition` ASC) ,
   CONSTRAINT `fk_evenement_categorie`
     FOREIGN KEY (`categorie_idCategorie`)
     REFERENCES `rendevDB`.`categorie` (`idCategorie`)
@@ -61,6 +33,30 @@ CREATE TABLE IF NOT EXISTS `rendevDB`.`evenement` (
     REFERENCES `rendevDB`.`position` (`idPosition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `rendevDB`.`categorie`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rendevDB`.`categorie` (
+  `idCategorie` INT NOT NULL AUTO_INCREMENT,
+  `nomCategorie` VARCHAR(45) NOT NULL,
+  `ImageCategorie` VARCHAR(45) NULL,
+  PRIMARY KEY (`idCategorie`),
+  UNIQUE INDEX `idCategorie_UNIQUE` (`idCategorie` ASC) ,
+  UNIQUE INDEX `nomCategorie_UNIQUE` (`nomCategorie` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `rendevDB`.`position`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rendevDB`.`position` (
+  `idPosition` INT NOT NULL AUTO_INCREMENT,
+  `latitude` DOUBLE NULL,
+  `longitude` DOUBLE NULL,
+  PRIMARY KEY (`idPosition`))
 ENGINE = InnoDB;
 
 

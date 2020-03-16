@@ -19,7 +19,6 @@ namespace Rendev
         public static readonly GMarkerGoogleType EVENT_MARKER_TYPE = GMarkerGoogleType.blue_dot;
 
         // Connection to DB constants
-        public static readonly string CONNECTION_STRING = "server=localhost;database=rendevdb;port=3306;userid=root;password=Super";
-
+        public static readonly string CONNECTION_STRING = "server=localhost;database=rendevdb;port=3307;userid=root;password=Super";
     }
 }
