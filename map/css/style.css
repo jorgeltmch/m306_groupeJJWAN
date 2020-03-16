@@ -9,6 +9,7 @@ body {
 .map {
   height: 100%;
   width: 100%;
+  float: left;
 }
 
 .card {
@@ -68,11 +69,13 @@ body {
 }
 
 #rightbox{ 
+  position: relative;
+  z-index: 2000;
   float:right; 
   width:25%; 
   height:280px; 
 } 
-.overlay {     
+/* .overlay {     
   width: 100px;
   position: absolute;
   top: 0;
@@ -84,4 +87,4 @@ body {
 .containerDiv {
   position: relative;
   width: 500px;
-}
+} */

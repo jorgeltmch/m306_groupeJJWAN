@@ -7,9 +7,9 @@ require_once './db/EDatabase.php';
 function getEvents(){
     static $req;
 
-    $sql = 'SELECT `idEvenement`, `nomEvenement`, `descriptionEvenement`,`dateEvent`, `latitude`,`longitude`, `nomCategorie`, `imageCategorie` FROM evenement 
-                JOIN position ON `evenement`.`position_idPosition` =  `position`.`idPosition` 
-                JOIN categorie ON `evenement`.`categorie_idCategorie` =  `categorie`.`idCategorie`; '; 
+    $sql =  'SELECT `idEvenement`, `nomEvenement`, `descriptionEvenement`,`dateEvent`, `latitude`,`longitude`
+                FROM evenement 
+                JOIN position ON `evenement`.`position_idPosition` =  `position`.`idPosition`'; 
     if ($req == null) {
         try {
             $req = EDatabase::prepare($sql);
@@ -28,7 +28,9 @@ function getEvents(){
 
 function getEventByID($id){
 
-    $sql = 'SELECT `idEvenement`, `nomEvenement`, `descriptionEvenement`,`dateEvent`, `latitude`,`longitude`, `nomCategorie`, `imageCategorie` FROM evenement 
+    $sql = 
+    'SELECT `idEvenement`, `nomEvenement`, `descriptionEvenement`,`dateEvent`, `latitude`,`longitude`, `nomCategorie` 
+    FROM evenement 
     JOIN position ON `evenement`.`position_idPosition` =  `position`.`idPosition` 
     JOIN categorie ON `evenement`.`categorie_idCategorie` =  `categorie`.`idCategorie` 
     WHERE idEvenement = :id'; 

@@ -31,13 +31,11 @@ if (!empty($idSelected)) {
       <input type="hidden" id="idHidden" name="idHidden" value="" />
     </form>
 
-
     <div id="map" class="map"></div>
     <div id="status">
     </div>
 
-    
-	<div id="popup" class="ol-popup">
+    <div id="popup" class="ol-popup">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
       <div id="popup-content"></div>
     </div>
@@ -53,10 +51,6 @@ var latSelected = <?php echo json_encode(getEventByID($idSelected)[0]["latitude"
 var longSelected = <?php echo json_encode(getEventByID($idSelected)[0]["longitude"]); ?>;
 
 var container = document.getElementById('popup');
-var content = document.getElementById('popup-content');
-var closer = document.getElementById('popup-closer');
-
-
 /**
  * Create an overlay to anchor the popup to the map.
  */
@@ -74,9 +68,7 @@ var overlay = new ol.Overlay({
  * @return {boolean} Don't follow the href.
  */
 
-
-
-    var map = new ol.Map({
+var map = new ol.Map({
     overlays: [overlay],
     target: 'map',
     layers: [
